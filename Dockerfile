@@ -4,9 +4,9 @@ FROM openjdk:17-jdk-slim
 # 2. 작업 디렉토리 설정
 WORKDIR /app
 
-# 3. 필수 패키지 설치 (lsof, fuser 포함)
+# 3. 필수 패키지 설치 (lsof, fuser 포함 + coreutils)
 RUN apt-get update && \
-    apt-get install -y lsof psmisc && \
+    apt-get install -y lsof psmisc coreutils && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
