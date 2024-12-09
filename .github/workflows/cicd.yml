@@ -1,0 +1,101 @@
+name: Spring Boot CI/CD
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build-and-push:
+    runs-on: ubuntu-latest
+
+    steps:
+      # CI
+      - name: Check out code
+        uses: actions/checkout@v3
+
+      - name: Set up JDK
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+
+      - name: Grant execute permissions for Gradle wrapper
+        run: chmod +x ./gradlew
+
+      - name: Build with Gradle
+        run: ./gradlew clean build
+
+      - name: Create application.yml
+        run: |
+          echo "${{ secrets.APPLICATION }}" > src/main/resources/application.yml
+
+      - name: Set up Docker
+        uses: docker/setup-buildx-action@v2
+
+      - name: Log in to Docker Hub
+        run: echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u "${{ secrets.DOCKER_USERNAME }}" --password-stdin
+
+      - name: Build Docker image
+        run: |
+          docker build -t kjeok/des_backend:latest .
+
+      - name: Push Docker image to Docker Hub
+        run: docker push kjeok/des_backend:latest
+
+      - name: Remove old Docker images from Docker Hub
+        run: |
+          tags=$(curl -s -u "${{ secrets.DOCKER_USERNAME }}:${{ secrets.DOCKER_PASSWORD }}" \
+            https://hub.docker.com/v2/repositories/kjeok/des_backend/tags/ | jq -r '.results[].name')
+          
+          for tag in $tags; do
+            if [ "$tag" != "latest" ]; then
+              echo "Deleting old tag: $tag"
+              curl -X DELETE -u "${{ secrets.DOCKER_USERNAME }}:${{ secrets.DOCKER_PASSWORD }}" \
+                https://hub.docker.com/v2/repositories/kjeok/des_backend/tags/$tag/
+            fi
+          done
+
+      # CD
+      - name: Set up SSH
+        uses: webfactory/ssh-agent@v0.5.3
+        with:
+          ssh-private-key: ${{ secrets.EC2_PRIVATE_KEY }}
+
+      - name: Deploy to EC2
+        uses: appleboy/ssh-action@v0.1.8
+        with:
+          host: ${{ secrets.EC2_HOST }}
+          username: ${{ secrets.EC2_USER }}
+          port: 22
+          key: ${{ secrets.EC2_PRIVATE_KEY }}
+          script: |
+            # 기존 컨테이너 중지 및 삭제
+            if docker ps -q --filter "name=des_backend"; then
+              docker stop des_backend
+              docker rm des_backend
+            fi
+
+            if lsof -i :8080 | grep LISTEN; then
+              fuser -k 8080/tcp
+            fi
+
+            # 최신 이미지 가져오기
+            docker pull kjeok/des_backend:latest
+
+            # 네트워크 보장 (네트워크가 없으면 생성)
+            if ! docker network ls | grep des_network; then
+              docker network create des_network
+            fi
+
+            # 새 컨테이너 실행
+            docker run -d --name des_backend \
+              --network des_network \
+              -p 8080:8080 \
+              kjeok/des_backend:latest
+
+            # 컨테이너 상태 확인
+            docker ps --filter "name=des_backend"
+
+            # 컨테이너 로그 출력 (디버깅용)
+            docker logs des_backend

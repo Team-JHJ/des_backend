@@ -1,0 +1,12 @@
+services:
+  backend:
+    image: kjeok/des_backend:latest
+    container_name: des_backend
+    ports:
+      - "8080:8080"
+    networks:
+      - des_network
+
+networks:
+  des_network:
+    external: true
