@@ -23,9 +23,6 @@ jobs:
       - name: Grant execute permissions for Gradle wrapper
         run: chmod +x ./gradlew
 
-      - name: Build with Gradle
-        run: ./gradlew clean build || exit 1
-
       - name: Create application.yml
         run: |
           echo "${{ secrets.APPLICATION }}" > src/main/resources/application.yml
@@ -38,17 +35,16 @@ jobs:
 
       - name: Build Docker image
         run: |
-          docker build -t kjeok/des_backend:latest -t kjeok/des_backend:${{ github.sha }} .
+          docker build -t kjeok/des_backend:latest .
 
       - name: Push Docker image to Docker Hub
-        run: |
-          docker push kjeok/des_backend:latest
-          docker push kjeok/des_backend:${{ github.sha }}
+        run: docker push kjeok/des_backend:latest
 
       - name: Remove old Docker images from Docker Hub
         run: |
           tags=$(curl -s -u "${{ secrets.DOCKER_USERNAME }}:${{ secrets.DOCKER_PASSWORD }}" \
             https://hub.docker.com/v2/repositories/kjeok/des_backend/tags/ | jq -r '.results[].name')
+          
           for tag in $tags; do
             if [ "$tag" != "latest" ]; then
               echo "Deleting old tag: $tag"
@@ -77,7 +73,6 @@ jobs:
               docker rm des_backend
             fi
 
-            # 포트 충돌 해결
             if lsof -i :8080 | grep LISTEN; then
               fuser -k 8080/tcp
             fi
@@ -85,7 +80,7 @@ jobs:
             # 최신 이미지 가져오기
             docker pull kjeok/des_backend:latest
 
-            # 네트워크 보장
+            # 네트워크 보장 (네트워크가 없으면 생성)
             if ! docker network ls | grep des_network; then
               docker network create des_network
             fi
@@ -99,5 +94,5 @@ jobs:
             # 컨테이너 상태 확인
             docker ps --filter "name=des_backend"
 
-            # 컨테이너 로그 출력
-            docker logs --tail 100 des_backend
+            # 컨테이너 로그 출력 (디버깅용)
+            docker logs des_backend
