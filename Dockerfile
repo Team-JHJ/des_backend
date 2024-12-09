@@ -10,14 +10,21 @@ RUN apt-get update && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
-# 4. 전체 프로젝트 복사
+# 4. Gradle Wrapper 파일 복사 (Gradle 설치)
+COPY gradlew /app/gradlew
+COPY gradle /app/gradle
+
+# 5. 전체 프로젝트 복사
 COPY . /app
 
-# 5. 포트 노출
+# 6. Gradle 빌드 수행 (컨테이너 내부에서 빌드)
+RUN chmod +x gradlew && ./gradlew clean build -x test
+
+# 7. 빌드된 JAR 파일만 추출
+RUN mkdir -p /app/dist && cp /app/build/libs/*.jar /app/dist/app.jar
+
+# 8. 포트 노출
 EXPOSE 8080
 
-# 6. Gradle 빌드 수행 (컨테이너 내부에서 빌드)
-RUN ./gradlew clean build -x test
-
-# 7. JAR 실행
-CMD ["java", "-jar", "/app/build/libs/des_backend-1.0-SNAPSHOT.jar"]
+# 9. JAR 실행
+CMD ["java", "-jar", "/app/dist/app.jar"]
