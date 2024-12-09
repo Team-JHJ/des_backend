@@ -5,9 +5,6 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ec1b0bb8-3069-49da-b1ed-7eb13a7dd72b" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.github/workflows/cicd.yml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Dockerfile" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/docker-compose.yml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -90,7 +87,7 @@
       <updated>1733741511657</updated>
       <workItem from="1733741512723" duration="458000" />
       <workItem from="1733742224945" duration="59000" />
-      <workItem from="1733743049556" duration="635000" />
+      <workItem from="1733743049556" duration="1096000" />
     </task>
     <servers />
   </component>
