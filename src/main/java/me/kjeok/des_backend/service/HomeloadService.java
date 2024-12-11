@@ -3,7 +3,6 @@ package me.kjeok.des_backend.service;
 import lombok.AllArgsConstructor;
 import me.kjeok.des_backend.domain.Home;
 import me.kjeok.des_backend.domain.Homeload;
-import me.kjeok.des_backend.domain.Smartmeter;
 import me.kjeok.des_backend.repository.HomeRepository;
 import me.kjeok.des_backend.repository.HomeloadRepository;
 import org.springframework.stereotype.Service;

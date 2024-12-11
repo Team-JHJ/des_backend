@@ -9,8 +9,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import static java.util.stream.Collectors.toList;
 
 @RestController
 @AllArgsConstructor
@@ -23,17 +26,18 @@ public class DerController {
         List<Der> ders = derService.findAll();
 
         List<Map<String, Object>> response = ders.stream()
-                .map(der -> Map.of(
-                        "item", Map.of(
-                                "battery", der.getBattery(),
-                                "isFault", der.getIsFault(),
-                                "derName", der.getDerName(),
-                                "type", der.getType(),
-                                "id", der.getId()
-                        ),
-                        "details", new DerResponse(der)
-                ))
+                .map(der -> {
+                    Map<String, Object> map = new HashMap<>();
+                    map.put("id", der.getId());
+                    map.put("name", der.getDerName());
+                    map.put("isFault", der.getIsFault());
+                    map.put("type", der.getType());
+                    map.put("battery", der.getBattery());
+                    map.put("details", new DerResponse(der));
+                    return map;
+                })
                 .toList();
+
         return ResponseEntity.ok(response);
     }
 }

@@ -7,7 +7,7 @@ import me.kjeok.des_backend.domain.Vpp;
 @Getter
 @AllArgsConstructor
 public class VppResponse {
-    private Long id;
+    //private Long id;
     private int aggregatedCapacity;
     private int availableStorage;
     private int batteryEfficiency;
@@ -26,7 +26,7 @@ public class VppResponse {
     private Boolean marketParticipation;
 
     public VppResponse(Vpp vpp) {
-        this.id = vpp.getId();
+        //this.id = vpp.getId();
         this.aggregatedCapacity = vpp.getAggregatedCapacity();
         this.availableStorage = vpp.getAvailableStorage();
         this.batteryEfficiency = vpp.getBatteryEfficiency();

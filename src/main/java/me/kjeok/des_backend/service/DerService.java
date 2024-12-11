@@ -3,11 +3,9 @@ package me.kjeok.des_backend.service;
 import lombok.AllArgsConstructor;
 import me.kjeok.des_backend.domain.Der;
 import me.kjeok.des_backend.domain.Home;
-import me.kjeok.des_backend.domain.Smartmeter;
 import me.kjeok.des_backend.repository.DerRepository;
 import me.kjeok.des_backend.repository.HomeRepository;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.List;
 
