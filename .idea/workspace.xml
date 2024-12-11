@@ -4,7 +4,15 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ec1b0bb8-3069-49da-b1ed-7eb13a7dd72b" name="Changes" comment="" />
+    <list default="true" id="ec1b0bb8-3069-49da-b1ed-7eb13a7dd72b" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/main/java/me/kjeok/des_backend/domain/Der.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/me/kjeok/des_backend/domain/Home.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/me/kjeok/des_backend/domain/Homeload.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/me/kjeok/des_backend/domain/Inverter.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/me/kjeok/des_backend/domain/Smartmeter.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/me/kjeok/des_backend/domain/Vpp.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -32,6 +40,14 @@
       </state>
     </system>
   </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+        <option value="com.intellij.jpb.JpaEntity" />
+      </list>
+    </option>
+  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
@@ -54,7 +70,13 @@
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "preferences.lookFeel",
     "vue.rearranger.settings.migration": "true"
+  },
+  "keyToStringList": {
+    "DatabaseDriversLRU": [
+      "mysql"
+    ]
   }
 }]]></component>
   <component name="RunManager">
@@ -86,6 +108,8 @@
       <workItem from="1733741512723" duration="458000" />
       <workItem from="1733742224945" duration="59000" />
       <workItem from="1733743049556" duration="3541000" />
+      <workItem from="1733885470884" duration="384000" />
+      <workItem from="1733889120532" duration="6831000" />
     </task>
     <servers />
   </component>
