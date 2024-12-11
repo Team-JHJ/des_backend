@@ -1,31 +1,30 @@
 package me.kjeok.des_backend.service;
 
 import lombok.AllArgsConstructor;
-import me.kjeok.des_backend.domain.Der;
 import me.kjeok.des_backend.domain.Home;
+import me.kjeok.des_backend.domain.Homeload;
 import me.kjeok.des_backend.domain.Smartmeter;
-import me.kjeok.des_backend.repository.DerRepository;
 import me.kjeok.des_backend.repository.HomeRepository;
+import me.kjeok.des_backend.repository.HomeloadRepository;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.List;
 
 @Service
 @AllArgsConstructor
-public class DerService {
-    private final DerRepository derRepository;
+public class HomeloadService {
+    private final HomeloadRepository homeloadRepository;
     private final HomeRepository homeRepository;
 
-    public List<Der> findAll() {
-        return derRepository.findAll();
+    public List<Homeload> findAll() {
+        return homeloadRepository.findAll();
     }
 
-    public boolean getDerIsFault(Long homeId) {
+    public boolean getHomeloadIsFault(Long homeId) {
         Home home = homeRepository.findById(homeId)
                 .orElseThrow(() -> new IllegalArgumentException("Home not found"));
 
-        return derRepository.findByHome(home).stream()
-                .anyMatch(Der::getIsFault);
+        return homeloadRepository.findByHome(home).stream()
+                .anyMatch(Homeload::getIsFault);
     }
 }

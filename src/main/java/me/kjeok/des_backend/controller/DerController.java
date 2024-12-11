@@ -6,6 +6,7 @@ import me.kjeok.des_backend.dto.DerResponse;
 import me.kjeok.des_backend.service.DerService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -13,11 +14,12 @@ import java.util.Map;
 
 @RestController
 @AllArgsConstructor
+@RequestMapping("/api/der")
 public class DerController {
     private final DerService derService;
 
-    @GetMapping("/api/getAllDers")
-    public ResponseEntity<List<Map<String, Object>>> getAllDers() {
+    @GetMapping
+    public ResponseEntity<List<Map<String, Object>>> getAll() {
         List<Der> ders = derService.findAll();
 
         List<Map<String, Object>> response = ders.stream()

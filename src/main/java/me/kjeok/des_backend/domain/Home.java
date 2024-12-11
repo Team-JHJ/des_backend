@@ -20,7 +20,7 @@ public class Home {
     @Column(name = "id", updatable = false)
     private Long id;
 
-    @Column(name = "homename", nullable = false)
+    @Column(name = "home_name", nullable = false)
     private String homename;
 
     @Column(name = "is_fault", nullable = false)
@@ -30,10 +30,6 @@ public class Home {
     @JoinColumn(name = "vpp_id", nullable = false) // Home은 반드시 Vpp와 연결되어야 한다고 가정
     private Vpp vpp;
 
-    @ManyToOne
-    @JoinColumn(name = "inverter_id", nullable = false) // Home은 반드시 Inverter와 연결되어야 한다고 가정
-    private Inverter inverter;
-
     @OneToMany(mappedBy = "home", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Der> ders = new ArrayList<>();
 
@@ -42,4 +38,7 @@ public class Home {
 
     @OneToMany(mappedBy = "home", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Smartmeter> smartmeters = new ArrayList<>();
+
+    @OneToMany(mappedBy = "home", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Inverter> inverters = new ArrayList<>();
 }

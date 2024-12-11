@@ -69,8 +69,5 @@ public class Vpp {
     private Boolean isFault;
 
     @OneToMany(mappedBy = "vpp", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Inverter> inverters;
-
-    @OneToMany(mappedBy = "vpp", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Home> homes;
 }

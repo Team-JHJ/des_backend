@@ -4,7 +4,6 @@ import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import java.util.List;
 
 @Entity
 @Table(name = "inverter")
@@ -59,9 +58,6 @@ public class Inverter {
     private String inverterName;
 
     @ManyToOne
-    @JoinColumn(name = "vpp_id")
-    private Vpp vpp;
-
-    @OneToMany(mappedBy = "inverter", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Home> homes;
+    @JoinColumn(name = "home_id")
+    private Home home;
 }
