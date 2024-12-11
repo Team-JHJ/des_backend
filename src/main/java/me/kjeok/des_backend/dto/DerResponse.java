@@ -3,13 +3,9 @@ package me.kjeok.des_backend.dto;
 import lombok.Getter;
 import me.kjeok.des_backend.domain.Der;
 
-import java.util.Date;
-
 @Getter
 public class DerResponse {
-    private final Long id;
-    private final String type;
-    private final Date installationDate;
+    private final String installationDate;
     private final String location;
     private final int generationCapacity;
     private final int storageCapacity;
@@ -27,11 +23,8 @@ public class DerResponse {
     private final float carbonIntensity;
     private final int renewableShare;
     private final int carbonFootprint;
-    private final int battery;
 
     public DerResponse(Der der) {
-        this.id = der.getId();
-        this.type = der.getType();
         this.installationDate = der.getInstallationDate();
         this.location = der.getLocation();
         this.generationCapacity = der.getGenerationCapacity();
@@ -50,6 +43,5 @@ public class DerResponse {
         this.carbonIntensity = der.getCarbonIntensity();
         this.renewableShare = der.getRenewableShare();
         this.carbonFootprint = der.getCarbonFootprint();
-        this.battery = der.getBattery();
     }
 }

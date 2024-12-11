@@ -4,8 +4,6 @@ import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-
-import java.util.Date;
 import java.util.List;
 
 @Entity
@@ -22,7 +20,7 @@ public class Inverter {
     private String type;
 
     @Column(name = "installation_date")
-    private Date installationDate;
+    private String installationDate;
 
     @Column(name = "efficiency")
     private int efficiency;
@@ -56,6 +54,9 @@ public class Inverter {
 
     @Column(name = "is_fault")
     private Boolean isFault;
+
+    @Column(name = "inverter_name")
+    private String inverterName;
 
     @ManyToOne
     @JoinColumn(name = "vpp_id")

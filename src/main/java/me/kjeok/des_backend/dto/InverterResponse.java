@@ -1,15 +1,12 @@
 package me.kjeok.des_backend.dto;
 
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import me.kjeok.des_backend.domain.Inverter;
-
-import java.util.Date;
 
 @Getter
 public class InverterResponse {
     private final Long id;
-    private final Date installationDate;
+    private final String installationDate;
     private final int efficiency;
     private final int warranty;
     private final int capacity;

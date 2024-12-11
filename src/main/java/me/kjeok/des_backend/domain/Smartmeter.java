@@ -5,8 +5,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.util.Date;
-
 @Entity
 @Getter
 @Setter
@@ -19,7 +17,7 @@ public class Smartmeter {
     private Long id;
 
     @Column(name = "installation_date")
-    private Date installationDate;
+    private String installationDate;
 
     @Column(name = "realtime_monitoring")
     private Boolean realtimeMonitoring;
@@ -38,6 +36,9 @@ public class Smartmeter {
 
     @Column(name = "is_fault")
     private Boolean isFault;
+
+    @Column(name = "smartmeter_name")
+    private String smartmeterName;
 
     @ManyToOne
     @JoinColumn(name = "home_id")

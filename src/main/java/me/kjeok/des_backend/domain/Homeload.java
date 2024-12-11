@@ -29,7 +29,7 @@ public class Homeload {
     @Column(name = "energy_cost")
     private float energyCost;
 
-    @Column(name = "dilay_consumption")
+    @Column(name = "daily_consumption")
     private int dailyConsumption;
 
     @Column(name = "carbon_footprint")
@@ -58,6 +58,9 @@ public class Homeload {
 
     @Column(name = "is_fault")
     private Boolean isFault;
+
+    @Column(name = "homeload_name")
+    private String homeloadName;
 
     @ManyToOne
     @JoinColumn(name = "home_id")

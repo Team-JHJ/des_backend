@@ -4,13 +4,11 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import me.kjeok.des_backend.domain.Smartmeter;
 
-import java.util.Date;
-
 @Getter
 @AllArgsConstructor
 public class SmartmeterResponse {
     private final Long id;
-    private final Date installationDate;
+    private final String installationDate;
     private final Boolean realtimeMonitoring;
     private final String transmissionFrequency;
     private final int energyExported;

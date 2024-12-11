@@ -6,8 +6,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.util.Date;
-
 @Entity
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Getter
@@ -23,7 +21,7 @@ public class Der {
     private String type;
 
     @Column(name = "installation_date")
-    private Date installationDate;
+    private String installationDate;
 
     @Column(name = "location", length = 255)
     private String location;
@@ -85,4 +83,7 @@ public class Der {
 
     @Column(name = "battery")
     private int battery;
+
+    @Column(name = "der_name")
+    private String derName;
 }
