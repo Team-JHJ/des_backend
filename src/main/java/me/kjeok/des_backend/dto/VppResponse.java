@@ -2,6 +2,7 @@ package me.kjeok.des_backend.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import me.kjeok.des_backend.domain.Vpp;
 
 @Getter
 @AllArgsConstructor
@@ -23,4 +24,24 @@ public class VppResponse {
     private Boolean voltageSupport;
     private Boolean demandResponse;
     private Boolean marketParticipation;
+
+    public VppResponse(Vpp vpp) {
+        this.id = vpp.getId();
+        this.aggregatedCapacity = vpp.getAggregatedCapacity();
+        this.availableStorage = vpp.getAvailableStorage();
+        this.batteryEfficiency = vpp.getBatteryEfficiency();
+        this.dispatchableEnergy = vpp.getDispatchableEnergy();
+        this.capacityFactor = vpp.getCapacityFactor();
+        this.forecastedLoad = vpp.getForecastedLoad();
+        this.responseTime = vpp.getResponseTime();
+        this.renewableShare = vpp.getRenewableShare();
+        this.marketRevenue = vpp.getMarketRevenue();
+        this.sellingAmount = vpp.getSellingAmount();
+        this.sellingPrice = vpp.getSellingPrice();
+        this.realtimeGrid = vpp.getRealtimeGrid();
+        this.frequencyRegulation = vpp.getFrequencyRegulation();
+        this.voltageSupport = vpp.getVoltageSupport();
+        this.demandResponse = vpp.getDemandResponse();
+        this.marketParticipation = vpp.getMarketParticipation();
+    }
 }

@@ -44,6 +44,9 @@ public class Vpp {
     @Column(name = "market_revenue")
     private int marketRevenue;
 
+    @Column(name = "selling_amount")
+    private int sellingAmount;
+
     @Column(name = "selling_price")
     private float sellingPrice;
 

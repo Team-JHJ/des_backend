@@ -73,6 +73,9 @@ public class Der {
     @Column(name = "renewable_share")
     private int renewableShare;
 
+    @Column(name = "carbon_footprint")
+    private int carbonFootprint;
+
     @Column(name = "is_fault", nullable = false)
     private Boolean isFault = false;
 

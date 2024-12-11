@@ -2,14 +2,24 @@ package me.kjeok.des_backend.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import me.kjeok.des_backend.domain.Home;
 
 @Getter
 @AllArgsConstructor
 public class HomeResponse {
-    private Long id;
-    private String homename;
-    private Boolean inverterFault;
-    private Boolean derFault;
-    private Boolean homeloadFault;
-    private Boolean smartmeterFault;
+    private final Long id;
+    private final String homename;
+    private final Boolean inverterFault;
+    private final Boolean derFault;
+    private final Boolean homeloadFault;
+    private final Boolean smartmeterFault;
+
+    public HomeResponse(Home home, Boolean inverterFault, Boolean derFault, Boolean homeloadFault, Boolean smartmeterFault) {
+        this.id = home.getId();
+        this.homename = home.getHomename();
+        this.inverterFault = inverterFault;
+        this.derFault = derFault;
+        this.homeloadFault = homeloadFault;
+        this.smartmeterFault = smartmeterFault;
+    }
 }
