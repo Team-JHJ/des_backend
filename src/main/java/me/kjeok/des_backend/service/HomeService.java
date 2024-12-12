@@ -37,4 +37,19 @@ public class HomeService {
                 ))
                 .toList();
     }
+
+    public HomeResponse createHome(String homeName) {
+        Home home = new Home();
+        home.setHomename(homeName);
+        home.setIsFault(false);
+        homeRepository.save(home);
+
+        return new HomeResponse(
+                home,
+                inverterService.getInverterIsFault(home.getId()),
+                derService.getDerIsFault(home.getId()),
+                homeloadService.getHomeloadIsFault(home.getId()),
+                smartmeterService.getSmartmeterIsFault(home.getId())
+        );
+    }
 }
