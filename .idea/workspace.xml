@@ -7,7 +7,11 @@
     <list default="true" id="ec1b0bb8-3069-49da-b1ed-7eb13a7dd72b" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/me/kjeok/des_backend/controller/HomeController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/kjeok/des_backend/controller/HomeController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/me/kjeok/des_backend/domain/Der.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/kjeok/des_backend/domain/Der.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/me/kjeok/des_backend/domain/Home.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/kjeok/des_backend/domain/Home.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/me/kjeok/des_backend/dto/HomeResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/kjeok/des_backend/dto/HomeResponse.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/me/kjeok/des_backend/repository/HomeRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/kjeok/des_backend/repository/HomeRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/me/kjeok/des_backend/service/DerService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/kjeok/des_backend/service/DerService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/me/kjeok/des_backend/service/HomeService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/kjeok/des_backend/service/HomeService.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -121,6 +125,10 @@
       <workItem from="1733911158009" duration="9916000" />
       <workItem from="1733999716396" duration="3931000" />
       <workItem from="1734003819840" duration="806000" />
+      <workItem from="1734063782797" duration="2887000" />
+      <workItem from="1734072301448" duration="260000" />
+      <workItem from="1734074771542" duration="756000" />
+      <workItem from="1734079866640" duration="846000" />
     </task>
     <servers />
   </component>

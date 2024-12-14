@@ -1,7 +1,6 @@
 package me.kjeok.des_backend.domain;
 
 import jakarta.persistence.*;
-import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -21,7 +20,7 @@ public class Home {
     private Long id;
 
     @Column(name = "home_name", nullable = false)
-    private String homename;
+    private String homeName;
 
     @Column(name = "is_fault", nullable = false)
     private Boolean isFault = false;

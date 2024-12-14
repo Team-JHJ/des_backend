@@ -18,7 +18,7 @@ public class HomeResponse {
 
     public HomeResponse(Home home, boolean inverterFault, boolean derFault, boolean homeloadFault, boolean smartmeterFault) {
         this.id = home.getId();
-        this.homename = home.getHomename();
+        this.homename = home.getHomeName();
         this.inverterFault = inverterFault;
         this.derFault = derFault;
         this.homeloadFault = homeloadFault;
