@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/des_backend.main.iml" filepath="$PROJECT_DIR$/.idea/modules/des_backend.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/me.kjeok.des_backend.main.iml" filepath="$PROJECT_DIR$/.idea/modules/me.kjeok.des_backend.main.iml" />
     </modules>
   </component>
 </project>

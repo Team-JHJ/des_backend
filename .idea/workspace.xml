@@ -5,14 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ec1b0bb8-3069-49da-b1ed-7eb13a7dd72b" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/me/kjeok/des_backend/controller/HomeController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/kjeok/des_backend/controller/HomeController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/me/kjeok/des_backend/domain/Der.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/kjeok/des_backend/domain/Der.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/me/kjeok/des_backend/domain/Home.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/kjeok/des_backend/domain/Home.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/me/kjeok/des_backend/dto/HomeResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/kjeok/des_backend/dto/HomeResponse.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/me/kjeok/des_backend/repository/HomeRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/kjeok/des_backend/repository/HomeRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.properties" beforeDir="false" afterPath="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.properties" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/me/kjeok/des_backend/service/DerService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/kjeok/des_backend/service/DerService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/me/kjeok/des_backend/service/HomeService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/kjeok/des_backend/service/HomeService.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -33,6 +30,23 @@
               <path>
                 <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
                 <item name="des_backend" type="f1a62948:ProjectNode" />
+              </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="des_backend" type="f1a62948:ProjectNode" />
+                <item name="Dependencies" type="6de06a37:ExternalSystemViewDefaultContributor$MyDependenciesNode" />
+              </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="des_backend" type="f1a62948:ProjectNode" />
+                <item name="Dependencies" type="6de06a37:ExternalSystemViewDefaultContributor$MyDependenciesNode" />
+                <item name="runtimeClasspath" type="62daadca:ExternalSystemViewDefaultContributor$DependencyScopeExternalSystemNode" />
+              </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="des_backend" type="f1a62948:ProjectNode" />
+                <item name="Dependencies" type="6de06a37:ExternalSystemViewDefaultContributor$MyDependenciesNode" />
+                <item name="testRuntimeClasspath" type="62daadca:ExternalSystemViewDefaultContributor$DependencyScopeExternalSystemNode" />
               </path>
             </expand>
             <select />
@@ -61,6 +75,7 @@
   &quot;associatedIndex&quot;: 6
 }</component>
   <component name="ProjectId" id="2pybxdYoU0IeGrDb1jwkVxDudm3" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -73,16 +88,17 @@
     &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
     &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
     &quot;Spring Boot.DesBackendApplication.executor&quot;: &quot;Run&quot;,
     &quot;git-widget-placeholder&quot;: &quot;main&quot;,
     &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;D:/Github/완료프로젝트/DES_backend&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Github/des_backend&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
     &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
     &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.lookFeel&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   },
   &quot;keyToStringList&quot;: {
@@ -94,7 +110,7 @@
   <component name="RunManager">
     <configuration name="DesBackendApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
       <option name="FRAME_DEACTIVATION_UPDATE_POLICY" value="UpdateClassesAndResources" />
-      <module name="des_backend.main" />
+      <module name="me.kjeok.des_backend.main" />
       <option name="SPRING_BOOT_MAIN_CLASS" value="me.kjeok.des_backend.DesBackendApplication" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -104,8 +120,8 @@
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-jdk-9823dce3aa75-28b599e66164-intellij.indexing.shared.core-IU-242.23726.103" />
-        <option value="bundled-js-predefined-d6986cc7102b-5c90d61e3bab-JavaScript-IU-242.23726.103" />
+        <option value="bundled-jdk-9823dce3aa75-fdfe4dae3a2d-intellij.indexing.shared.core-IU-243.22562.145" />
+        <option value="bundled-js-predefined-d6986cc7102b-deb605915726-JavaScript-IU-243.22562.145" />
       </set>
     </attachedChunks>
   </component>
@@ -129,6 +145,10 @@
       <workItem from="1734072301448" duration="260000" />
       <workItem from="1734074771542" duration="756000" />
       <workItem from="1734079866640" duration="846000" />
+      <workItem from="1734239678010" duration="567000" />
+      <workItem from="1734240400497" duration="122000" />
+      <workItem from="1734240547033" duration="47000" />
+      <workItem from="1734240603622" duration="245000" />
     </task>
     <servers />
   </component>

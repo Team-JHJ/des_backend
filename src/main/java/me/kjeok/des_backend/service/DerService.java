@@ -28,15 +28,15 @@ public class DerService {
                 .anyMatch(Der::getIsFault);
     }
 
-    public DerResponse createDer(String type, String derName, Long homeId) {
-        Home home = homeRepository.findById(homeId)
-                .orElseThrow(() -> new IllegalArgumentException("Home not found"));
-
-        Der der = Der.builder()
-                .type(type)
-                .derName(derName)
-                .home(home)
-                .isFault(false)
-                .build();
-    }
+//    public DerResponse createDer(String type, String derName, Long homeId) {
+//        Home home = homeRepository.findById(homeId)
+//                .orElseThrow(() -> new IllegalArgumentException("Home not found"));
+//
+//        Der der = Der.builder()
+//                .type(type)
+//                .derName(derName)
+//                .home(home)
+//                .isFault(false)
+//                .build();
+//    }
 }
