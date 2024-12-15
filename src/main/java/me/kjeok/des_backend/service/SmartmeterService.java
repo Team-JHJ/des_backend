@@ -19,11 +19,15 @@ public class SmartmeterService {
         return smartmeterRepository.findAll();
     }
 
-    public boolean getSmartmeterIsFault(Long homeId) {
+    public Boolean getSmartmeterIsFault(Long homeId) {
         Home home = homeRepository.findById(homeId)
                 .orElseThrow(() -> new IllegalArgumentException("Home not found"));
 
-        return smartmeterRepository.findByHome(home).stream()
-                .anyMatch(Smartmeter::getIsFault);
+        List<Smartmeter> smartmeters = smartmeterRepository.findByHome(home);
+
+        if(smartmeters.isEmpty())
+            return null;
+        else
+            return smartmeters.stream().anyMatch(Smartmeter::getIsFault);
     }
 }

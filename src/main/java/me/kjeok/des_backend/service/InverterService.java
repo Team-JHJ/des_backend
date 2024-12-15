@@ -19,11 +19,15 @@ public class InverterService {
         return inverterRepository.findAll();
     }
 
-    public boolean getInverterIsFault(Long homeId) {
+    public Boolean getInverterIsFault(Long homeId) {
         Home home = homeRepository.findById(homeId)
                 .orElseThrow(() -> new IllegalArgumentException("Home not found"));
 
-        return inverterRepository.findByHome(home).stream()
-                .anyMatch(Inverter::getIsFault);
+        List<Inverter> inverters = inverterRepository.findByHome(home);
+
+        if(inverters.isEmpty())
+            return null;
+        else
+            return inverters.stream().anyMatch(Inverter::getIsFault);
     }
 }

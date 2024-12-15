@@ -9,6 +9,7 @@ import me.kjeok.des_backend.repository.VppRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.HashMap;
 import java.util.List;
 
 @Service
@@ -30,41 +31,77 @@ public class HomeService {
         return homeRepository.findById(homeId);
     }
 
-    public List<HomeResponse> getAllHomesWithFaults() {
-        List<Home> homes = homeRepository.findAll(); // 모든 Home 가져오기
-        return homes.stream()
-                .map(home -> new HomeResponse(
-                        home,
-                        inverterService.getInverterIsFault(home.getId()),
-                        derService.getDerIsFault(home.getId()),
-                        homeloadService.getHomeloadIsFault(home.getId()),
-                        smartmeterService.getSmartmeterIsFault(home.getId())
-                ))
-                .toList();
+    public void updateHomeFaults(Long homeId) {
+        Home home = homeRepository.findById(homeId)
+                .orElseThrow(() -> new IllegalArgumentException("Home not found"));
+
+        Boolean homeloadIsFault = homeloadService.getHomeloadIsFault(homeId);
+        Boolean inverterIsFault = inverterService.getInverterIsFault(homeId);
+        Boolean smartmeterIsFault = smartmeterService.getSmartmeterIsFault(homeId);
+        Boolean derIsFault = derService.getDerIsFault(homeId);
+
+        home.setInverterFault(inverterIsFault);
+        home.setSmartmeterFault(smartmeterIsFault);
+        home.setHomeloadFault(homeloadIsFault);
+        home.setDerFault(derIsFault);
+
+        homeRepository.save(home);
     }
 
-    public HomeResponse createHome(String homeName) {
-        // Vpp 객체 가져오기 (예: 기본 Vpp ID = 1L)
-        Vpp defaultVpp = vppRepository.findById(1L)
-                .orElseThrow(() -> new IllegalArgumentException("Default VPP not found"));
+    public HomeResponse getHomeWithFaults(Long homeId) {
+        // Home Fault 상태 업데이트
+        updateHomeFaults(homeId);
 
-        // Home 객체 생성 및 설정
-        Home home = new Home();
-        home.setHomeName(homeName);
-        home.setIsFault(false);
-        home.setVpp(defaultVpp);
-
-        // Home 저장
-        homeRepository.save(home);
+        // Home 조회
+        Home home = homeRepository.findById(homeId)
+                .orElseThrow(() -> new IllegalArgumentException("Home not found"));
 
         // HomeResponse 생성 및 반환
         return new HomeResponse(
-                home,
-                inverterService.getInverterIsFault(home.getId()),
-                derService.getDerIsFault(home.getId()),
-                homeloadService.getHomeloadIsFault(home.getId()),
-                smartmeterService.getSmartmeterIsFault(home.getId())
+                home.getId(),
+                home.getHomeName(),
+                home.getInverterFault(),
+                home.getDerFault(),
+                home.getHomeloadFault(),
+                home.getSmartmeterFault()
         );
+    }
+
+    public List<HomeResponse> getAllHomeswithFaults() {
+        List<Home> homes = homeRepository.findAll();
+
+        List<HomeResponse> response = homes.stream()
+                .map(home -> {
+                    updateHomeFaults(home.getId());
+                    return new HomeResponse(
+                            home.getId(),
+                            home.getHomeName(),
+                            home.getInverterFault(),
+                            home.getDerFault(),
+                            home.getHomeloadFault(),
+                            home.getSmartmeterFault()
+                    );
+                })
+                .toList();
+
+        return response;
+    }
+
+    public void updateHome(Long homeId, String homeName) {
+        Home home = homeRepository.findById(homeId)
+                .orElseThrow(() -> new IllegalArgumentException("Home not found"));
+
+        home.setHomeName(homeName);
+        homeRepository.save(home);
+    }
+
+    public void createHome(String homeName) {
+        Home home = new Home();
+        home.setHomeName(homeName);
+        home.setVpp(vppRepository.findById(1L)
+                .orElseThrow(() -> new IllegalArgumentException("Vpp not found")));
+
+        homeRepository.save(home);
     }
 
     @Transactional

@@ -16,12 +16,12 @@ public class HomeResponse {
     private final Boolean homeloadFault;
     private final Boolean smartmeterFault;
 
-    public HomeResponse(Home home, boolean inverterFault, boolean derFault, boolean homeloadFault, boolean smartmeterFault) {
+    public HomeResponse(Home home) {
         this.id = home.getId();
         this.homename = home.getHomeName();
-        this.inverterFault = inverterFault;
-        this.derFault = derFault;
-        this.homeloadFault = homeloadFault;
-        this.smartmeterFault = smartmeterFault;
+        this.inverterFault = home.getInverterFault();
+        this.derFault = home.getDerFault();
+        this.homeloadFault = home.getHomeloadFault();
+        this.smartmeterFault = home.getSmartmeterFault();
     }
 }

@@ -20,23 +20,17 @@ public class DerService {
         return derRepository.findAll();
     }
 
-    public boolean getDerIsFault(Long homeId) {
+    public Boolean getDerIsFault(Long homeId) {
         Home home = homeRepository.findById(homeId)
                 .orElseThrow(() -> new IllegalArgumentException("Home not found"));
 
-        return derRepository.findByHome(home).stream()
-                .anyMatch(Der::getIsFault);
+        List<Der> ders = derRepository.findByHome(home);
+
+        if(ders.isEmpty())
+            return null;
+        else
+            return ders.stream().anyMatch(Der::getIsFault);
     }
 
-//    public DerResponse createDer(String type, String derName, Long homeId) {
-//        Home home = homeRepository.findById(homeId)
-//                .orElseThrow(() -> new IllegalArgumentException("Home not found"));
-//
-//        Der der = Der.builder()
-//                .type(type)
-//                .derName(derName)
-//                .home(home)
-//                .isFault(false)
-//                .build();
-//    }
+
 }

@@ -19,11 +19,16 @@ public class HomeloadService {
         return homeloadRepository.findAll();
     }
 
-    public boolean getHomeloadIsFault(Long homeId) {
+    public Boolean getHomeloadIsFault(Long homeId) {
+        // Home 조회
         Home home = homeRepository.findById(homeId)
                 .orElseThrow(() -> new IllegalArgumentException("Home not found"));
 
-        return homeloadRepository.findByHome(home).stream()
-                .anyMatch(Homeload::getIsFault);
+        // Homeload가 존재하는지 확인
+        List<Homeload> homeloads = homeloadRepository.findByHome(home);
+        if (homeloads.isEmpty())
+            return null;
+        else
+            return homeloads.stream().anyMatch(Homeload::getIsFault);
     }
 }
