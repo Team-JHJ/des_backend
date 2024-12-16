@@ -9,7 +9,7 @@ public class InverterResponse {
     private final String installationDate;
     private final int efficiency;
     private final int warranty;
-    private final int capacity;
+    private final int capacityFactor;
     private final int mpptCount;
     private final String manufacturer;
     private final String model;
@@ -23,7 +23,7 @@ public class InverterResponse {
         this.installationDate = inverter.getInstallationDate();
         this.efficiency = inverter.getEfficiency();
         this.warranty = inverter.getWarranty();
-        this.capacity = inverter.getCapacity();
+        this.capacityFactor = inverter.getCapacityFactor();
         this.mpptCount = inverter.getMpptCount();
         this.manufacturer = inverter.getManufacturer();
         this.model = inverter.getModel();

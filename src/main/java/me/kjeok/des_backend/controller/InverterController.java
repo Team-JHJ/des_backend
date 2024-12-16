@@ -27,8 +27,6 @@ public class InverterController {
     private final DescriptionService descriptionService;
     private final InverterService inverterService;
 
-
-
     @GetMapping("/search")
     public ResponseEntity<Map<String, Object>> getDescriptionResponses(@RequestParam("homeId") Long homeId) {
 
@@ -80,7 +78,7 @@ public class InverterController {
 
 
 
-    //    @GetMapping
+//    @GetMapping
 //    public ResponseEntity<List<Map<String, Object>>> getAll() {
 //        List<Inverter> inverters = inverterRepository.findAll();
 //

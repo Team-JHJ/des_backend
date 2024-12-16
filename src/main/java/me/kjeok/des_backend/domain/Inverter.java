@@ -29,8 +29,8 @@ public class Inverter {
     @Column(name = "warranty")
     private int warranty;
 
-    @Column(name = "capacity")
-    private int capacity;
+    @Column(name = "capacity_factor")
+    private int capacityFactor;
 
     @Column(name = "mppt_count")
     private int mpptCount;
