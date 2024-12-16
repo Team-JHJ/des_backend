@@ -5,10 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ec1b0bb8-3069-49da-b1ed-7eb13a7dd72b" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/me/kjeok/des_backend/config/SecurityConfig.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/me/kjeok/des_backend/config/CorsConfig.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/me/kjeok/des_backend/config/SecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/kjeok/des_backend/config/SecurityConfig.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -134,7 +132,7 @@
       <workItem from="1734241966338" duration="1368000" />
       <workItem from="1734258779562" duration="7205000" />
       <workItem from="1734330612430" duration="158000" />
-      <workItem from="1734331578321" duration="328000" />
+      <workItem from="1734331578321" duration="986000" />
     </task>
     <servers />
   </component>
