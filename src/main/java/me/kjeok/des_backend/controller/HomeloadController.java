@@ -26,24 +26,6 @@ public class HomeloadController {
     private final HomeloadRepository homeloadRepository;
     private final DescriptionService descriptionService;
 
-    @GetMapping
-    public ResponseEntity<List<Map<String, Object>>> getAll() {
-        List<Homeload> homeloads = homeloadService.findAll();
-
-        List<Map<String, Object>> response = homeloads.stream()
-                .map(homeload -> {
-                    Map<String, Object> map = new HashMap<>();
-                    map.put("id", homeload.getId());
-                    map.put("name", homeload.getHomeloadName());
-                    map.put("isFault", homeload.getIsFault());
-                    map.put("type", homeload.getType());
-                    map.put("details", new HomeloadResponse(homeload));
-                    return map;
-                })
-                .toList();
-
-        return ResponseEntity.ok(response);
-    }
 
     @GetMapping("/search")
     public ResponseEntity<Map<String, Object>> getDescriptionResponses(@RequestParam("homeId") Long homeId) {
@@ -94,4 +76,24 @@ public class HomeloadController {
         homeloadService.deleteHomeload(homeloadId);
         return ResponseEntity.ok("Homeload deleted");
     }
+
+
+//    @GetMapping
+//    public ResponseEntity<List<Map<String, Object>>> getAll() {
+//        List<Homeload> homeloads = homeloadService.findAll();
+//
+//        List<Map<String, Object>> response = homeloads.stream()
+//                .map(homeload -> {
+//                    Map<String, Object> map = new HashMap<>();
+//                    map.put("id", homeload.getId());
+//                    map.put("name", homeload.getHomeloadName());
+//                    map.put("isFault", homeload.getIsFault());
+//                    map.put("type", homeload.getType());
+//                    map.put("details", new HomeloadResponse(homeload));
+//                    return map;
+//                })
+//                .toList();
+//
+//        return ResponseEntity.ok(response);
+//    }
 }

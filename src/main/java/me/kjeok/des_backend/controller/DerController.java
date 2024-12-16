@@ -29,26 +29,6 @@ public class DerController {
     private final HomeRepository homeRepository;
     private final DescriptionService descriptionService;
 
-    @GetMapping
-    public ResponseEntity<List<Map<String, Object>>> getAll() {
-        List<Der> ders = derService.findAll();
-
-        List<Map<String, Object>> response = ders.stream()
-                .map(der -> {
-                    Map<String, Object> map = new HashMap<>();
-                    map.put("id", der.getId());
-                    map.put("name", der.getDerName());
-                    map.put("isFault", der.getIsFault());
-                    map.put("type", der.getType());
-                    map.put("battery", der.getBattery());
-                    map.put("details", new DerResponse(der));
-                    return map;
-                })
-                .toList();
-
-        return ResponseEntity.ok(response);
-    }
-
     @GetMapping("/search")
     public ResponseEntity<Map<String, Object>> getDescriptionResponses(@RequestParam("homeId") Long homeId) {
 
@@ -104,4 +84,27 @@ public class DerController {
         derService.createDer(homeId, derName);
         return ResponseEntity.ok("DER created successfully");
     }
+
+
+
+
+//    @GetMapping
+//    public ResponseEntity<List<Map<String, Object>>> getAll() {
+//        List<Der> ders = derService.findAll();
+//
+//        List<Map<String, Object>> response = ders.stream()
+//                .map(der -> {
+//                    Map<String, Object> map = new HashMap<>();
+//                    map.put("id", der.getId());
+//                    map.put("name", der.getDerName());
+//                    map.put("isFault", der.getIsFault());
+//                    map.put("type", der.getType());
+//                    map.put("battery", der.getBattery());
+//                    map.put("details", new DerResponse(der));
+//                    return map;
+//                })
+//                .toList();
+//
+//        return ResponseEntity.ok(response);
+//    }
 }

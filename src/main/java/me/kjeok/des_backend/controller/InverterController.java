@@ -27,24 +27,7 @@ public class InverterController {
     private final DescriptionService descriptionService;
     private final InverterService inverterService;
 
-    @GetMapping
-    public ResponseEntity<List<Map<String, Object>>> getAll() {
-        List<Inverter> inverters = inverterRepository.findAll();
 
-        List<Map<String, Object>> response = inverters.stream()
-                .map(inverter -> {
-                    Map<String, Object> map = new HashMap<>();
-                    map.put("id", inverter.getId());
-                    map.put("name", inverter.getInverterName());
-                    map.put("isFault", inverter.getIsFault());
-                    map.put("type", inverter.getType());
-                    map.put("details", new InverterResponse(inverter));
-                    return map;
-                })
-                .toList();
-
-        return ResponseEntity.ok(response);
-    }
 
     @GetMapping("/search")
     public ResponseEntity<Map<String, Object>> getDescriptionResponses(@RequestParam("homeId") Long homeId) {
@@ -94,4 +77,25 @@ public class InverterController {
         inverterService.deleteInverter(inverterId);
         return ResponseEntity.ok("Inverter deleted");
     }
+
+
+
+    //    @GetMapping
+//    public ResponseEntity<List<Map<String, Object>>> getAll() {
+//        List<Inverter> inverters = inverterRepository.findAll();
+//
+//        List<Map<String, Object>> response = inverters.stream()
+//                .map(inverter -> {
+//                    Map<String, Object> map = new HashMap<>();
+//                    map.put("id", inverter.getId());
+//                    map.put("name", inverter.getInverterName());
+//                    map.put("isFault", inverter.getIsFault());
+//                    map.put("type", inverter.getType());
+//                    map.put("details", new InverterResponse(inverter));
+//                    return map;
+//                })
+//                .toList();
+//
+//        return ResponseEntity.ok(response);
+//    }
 }

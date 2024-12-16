@@ -27,21 +27,7 @@ public class VppController {
     private final DescriptionService descriptionService;
     private final VppService vppService;
 
-    @GetMapping
-    public ResponseEntity<List<Map<String, Object>>> getAll() {
-        List<Vpp> vpps = vppRepository.findAll();
 
-        List<Map<String, Object>> response = vpps.stream()
-                .map(vpp -> {
-                    Map<String, Object> map = new HashMap<>();
-                    map.put("id", vpp.getId());
-                    map.put("isFault", vpp.getIsFault());
-                    map.put("details", new VppResponse(vpp));
-                    return map;
-                })
-                .toList();
-        return ResponseEntity.ok(response);
-    }
 
     @GetMapping("/search")
     public ResponseEntity<Map<String, Object>> getDescriptionResponses(@RequestParam("id") Long id) {
@@ -86,5 +72,21 @@ public class VppController {
         vppService.deleteVpp(id);
         return ResponseEntity.ok("Vpp deleted");
     }
+
+//    @GetMapping
+//    public ResponseEntity<List<Map<String, Object>>> getAll() {
+//        List<Vpp> vpps = vppRepository.findAll();
+//
+//        List<Map<String, Object>> response = vpps.stream()
+//                .map(vpp -> {
+//                    Map<String, Object> map = new HashMap<>();
+//                    map.put("id", vpp.getId());
+//                    map.put("isFault", vpp.getIsFault());
+//                    map.put("details", new VppResponse(vpp));
+//                    return map;
+//                })
+//                .toList();
+//        return ResponseEntity.ok(response);
+//    }
 
 }

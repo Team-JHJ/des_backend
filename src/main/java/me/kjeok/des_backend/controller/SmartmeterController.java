@@ -27,23 +27,7 @@ public class SmartmeterController {
     private final HomeRepository homeRepository;
     private final DescriptionService descriptionService;
 
-    @GetMapping
-    public ResponseEntity<List<Map<String, Object>>> getAll() {
-        List<Smartmeter> smartmeters = smartmeterService.findAll();
 
-        List<Map<String, Object>> response = smartmeters.stream()
-                .map(smartmeter -> {
-                    Map<String, Object> map = new HashMap<>();
-                    map.put("id", smartmeter.getId());
-                    map.put("name", smartmeter.getSmartmeterName());
-                    map.put("isFault", smartmeter.getIsFault());
-                    map.put("details", new SmartmeterResponse(smartmeter));
-                    return map;
-                })
-                .toList();
-
-        return ResponseEntity.ok(response);
-    }
 
     @GetMapping("/search")
     public ResponseEntity<Map<String, Object>> getDescriptionResponses(@RequestParam("homeId") Long homeId) {
@@ -93,4 +77,23 @@ public class SmartmeterController {
         smartmeterService.deleteSmartmeter(id);
         return ResponseEntity.ok("Smartmeter deleted");
     }
+
+
+    //    @GetMapping
+//    public ResponseEntity<List<Map<String, Object>>> getAll() {
+//        List<Smartmeter> smartmeters = smartmeterService.findAll();
+//
+//        List<Map<String, Object>> response = smartmeters.stream()
+//                .map(smartmeter -> {
+//                    Map<String, Object> map = new HashMap<>();
+//                    map.put("id", smartmeter.getId());
+//                    map.put("name", smartmeter.getSmartmeterName());
+//                    map.put("isFault", smartmeter.getIsFault());
+//                    map.put("details", new SmartmeterResponse(smartmeter));
+//                    return map;
+//                })
+//                .toList();
+//
+//        return ResponseEntity.ok(response);
+//    }
 }
