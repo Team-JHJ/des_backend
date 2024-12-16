@@ -26,7 +26,6 @@ public class VppResponse {
     private Boolean marketParticipation;
 
     public VppResponse(Vpp vpp) {
-        //this.id = vpp.getId();
         this.aggregatedCapacity = vpp.getAggregatedCapacity();
         this.availableStorage = vpp.getAvailableStorage();
         this.batteryEfficiency = vpp.getBatteryEfficiency();

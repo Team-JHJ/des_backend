@@ -79,8 +79,8 @@ public class HomeloadController {
 
         // 최종 응답 데이터 구성
         Map<String, Object> response = new HashMap<>();
-        response.put("categories", categoryResponses); // 상단 JSON 블록
-        response.put("derList", homeloadResponse);          // DER 데이터 블록
+        response.put("category", categoryResponses);
+        response.put("columns", homeloadResponse);
 
         // ResponseEntity로 응답 반환
         return ResponseEntity.ok(response);
