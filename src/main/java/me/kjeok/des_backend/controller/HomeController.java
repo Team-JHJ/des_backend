@@ -15,15 +15,6 @@ import java.util.List;
 public class HomeController {
     private final HomeService homeService;
 
-
-
-//    @GetMapping("/{homeId}/faults")
-//    public ResponseEntity<HomeResponse> getHomeFaults(@PathVariable Long homeId) {
-//        HomeResponse response = homeService.getHomeWithFaults(homeId);
-//        return ResponseEntity.ok(response);
-//    }
-
-
     @GetMapping
     public ResponseEntity<List<HomeResponse>> getAllHomes() {
         List<HomeResponse> homes = homeService.getAllHomeswithFaults();
@@ -31,21 +22,20 @@ public class HomeController {
     }
 
     @DeleteMapping
-    public ResponseEntity<String> deleteHome(Long homeId, String homeName  ) {
+    public ResponseEntity<String> deleteHome(@RequestParam Long homeId, @RequestParam String homeName  ) {
         homeService.deleteHome(homeId, homeName);
         return ResponseEntity.ok("Home " + homeName + " deleted");
     }
 
     @PostMapping
-    public ResponseEntity<String> createHome(String homeName) {
+    public ResponseEntity<String> createHome(@RequestParam String homeName) {
         homeService.createHome(homeName);
-        return ResponseEntity.ok("Home " + homeName + " created");
+        return ResponseEntity.ok(homeName + " created");
     }
 
-    @PutMapping("/{homeId}")
-    public ResponseEntity<String> updateHomeName(@PathVariable Long homeId, String homeName) {
-        homeService.updateHome(homeId, homeName);
-        return ResponseEntity.ok("Home " + homeId + " updated");
-    }
-
+//    @PutMapping("/{homeId}")
+//    public ResponseEntity<String> updateHomeName(@PathVariable Long homeId, String homeName) {
+//        homeService.updateHome(homeId, homeName);
+//        return ResponseEntity.ok("Home " + homeId + " updated");
+//    }
 }
