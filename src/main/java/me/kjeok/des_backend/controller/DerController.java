@@ -98,4 +98,10 @@ public class DerController {
         derRepository.deleteById(derId);
         return ResponseEntity.ok("DER deleted successfully");
     }
+
+    @PostMapping
+    public ResponseEntity<String> createDer(@RequestParam("homeId") Long homeId, @RequestParam("derName") String derName) {
+        derService.createDer(homeId, derName);
+        return ResponseEntity.ok("DER created successfully");
+    }
 }

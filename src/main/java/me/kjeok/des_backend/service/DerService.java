@@ -89,4 +89,15 @@ public class DerService {
     public void deleteDer(Long id) {
         derRepository.deleteById(id);
     }
+
+    public void createDer(Long homeId, String derName) {
+        Home home = homeRepository.findById(homeId)
+                .orElseThrow(() -> new IllegalArgumentException("Home not found"));
+
+        Der der = new Der();
+        der.setDerName(derName);
+        der.setHome(home);
+
+        derRepository.save(der);
+    }
 }

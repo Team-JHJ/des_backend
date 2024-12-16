@@ -77,4 +77,22 @@ public class SmartmeterService {
                 })
                 .collect(Collectors.toList());
     }
+
+    public void createSmartmeter(Long homeId, String smartmeterName) {
+        // Home 조회
+        Home home = homeRepository.findById(homeId)
+                .orElseThrow(() -> new IllegalArgumentException("Home not found"));
+
+        // Smartmeter 생성 및 설정
+        Smartmeter smartmeter = new Smartmeter();
+        smartmeter.setHome(home); // Home 설정
+        smartmeter.setSmartmeterName(smartmeterName); // SmartmeterName 설정
+
+        // Smartmeter 저장
+        smartmeterRepository.save(smartmeter);
+    }
+
+    public void deleteSmartmeter(Long id) {
+        smartmeterRepository.deleteById(id);
+    }
 }

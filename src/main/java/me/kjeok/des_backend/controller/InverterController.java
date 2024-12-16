@@ -12,10 +12,7 @@ import me.kjeok.des_backend.repository.InverterRepository;
 import me.kjeok.des_backend.service.DescriptionService;
 import me.kjeok.des_backend.service.InverterService;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
 import java.util.List;
@@ -84,5 +81,17 @@ public class InverterController {
 
         // ResponseEntity로 응답 반환
         return ResponseEntity.ok(response);
+    }
+
+    @PostMapping
+    public ResponseEntity<String> createInverter(@RequestParam("homeId") Long homeId, @RequestParam("inverterName") String inverterName) {
+        inverterService.createInverter(homeId, inverterName);
+        return ResponseEntity.ok("Inverter created");
+    }
+
+    @DeleteMapping
+    public ResponseEntity<String> deleteInverter(@RequestParam("inverterId") Long inverterId) {
+        inverterService.deleteInverter(inverterId);
+        return ResponseEntity.ok("Inverter deleted");
     }
 }

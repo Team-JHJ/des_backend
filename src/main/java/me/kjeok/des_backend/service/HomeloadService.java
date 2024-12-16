@@ -75,4 +75,19 @@ public class HomeloadService {
                 })
                 .collect(Collectors.toList());
     }
+
+    public void createHomeload(Long homeId, String homeloadName) {
+        Home home = homeRepository.findById(homeId)
+                .orElseThrow(() -> new IllegalArgumentException("Home not found"));
+
+        Homeload homeload = new Homeload();
+        homeload.setHome(home);
+        homeload.setHomeloadName(homeloadName);
+
+        homeloadRepository.save(homeload);
+    }
+
+    public void deleteHomeload(Long homeloadId) {
+        homeloadRepository.deleteById(homeloadId);
+    }
 }

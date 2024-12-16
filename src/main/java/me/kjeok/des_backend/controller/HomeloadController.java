@@ -11,10 +11,7 @@ import me.kjeok.des_backend.repository.HomeloadRepository;
 import me.kjeok.des_backend.service.DescriptionService;
 import me.kjeok.des_backend.service.HomeloadService;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
 import java.util.List;
@@ -84,5 +81,17 @@ public class HomeloadController {
 
         // ResponseEntity로 응답 반환
         return ResponseEntity.ok(response);
+    }
+
+    @PostMapping
+    public ResponseEntity<String> createHomeload(@RequestParam("homeId") Long homeId, @RequestParam("homeloadName") String homeloadName) {
+        homeloadService.createHomeload(homeId, homeloadName);
+        return ResponseEntity.ok("Homeload created");
+    }
+
+    @DeleteMapping
+    public ResponseEntity<String> deleteHomeload(@RequestParam("homeloadId") Long homeloadId) {
+        homeloadService.deleteHomeload(homeloadId);
+        return ResponseEntity.ok("Homeload deleted");
     }
 }

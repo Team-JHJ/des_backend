@@ -61,4 +61,12 @@ public class VppService {
                 .collect(Collectors.toList());
     }
 
+    public void deleteVpp(Long id) {
+        vppRepository.deleteById(id);
+    }
+
+    public void createVpp() {
+        Vpp vpp = new Vpp();
+        vppRepository.save(vpp);
+    }
 }
