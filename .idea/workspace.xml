@@ -6,15 +6,6 @@
   <component name="ChangeListManager">
     <list default="true" id="ec1b0bb8-3069-49da-b1ed-7eb13a7dd72b" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/me/kjeok/des_backend/config/SecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/kjeok/des_backend/config/SecurityConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/me/kjeok/des_backend/controller/DerController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/kjeok/des_backend/controller/DerController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/me/kjeok/des_backend/controller/HomeController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/kjeok/des_backend/controller/HomeController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/me/kjeok/des_backend/dto/DerResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/kjeok/des_backend/dto/DerResponse.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/me/kjeok/des_backend/dto/DescriptionResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/kjeok/des_backend/dto/DescriptionResponse.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/me/kjeok/des_backend/repository/DerRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/kjeok/des_backend/repository/DerRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/me/kjeok/des_backend/repository/DescriptionRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/kjeok/des_backend/repository/DescriptionRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/me/kjeok/des_backend/service/DerService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/kjeok/des_backend/service/DerService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/me/kjeok/des_backend/service/DescriptionService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/kjeok/des_backend/service/DescriptionService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/me/kjeok/des_backend/service/HomeService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/kjeok/des_backend/service/HomeService.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -141,7 +132,7 @@
       <workItem from="1734241966338" duration="1368000" />
       <workItem from="1734258779562" duration="7205000" />
       <workItem from="1734330612430" duration="158000" />
-      <workItem from="1734331578321" duration="8710000" />
+      <workItem from="1734331578321" duration="8908000" />
     </task>
     <servers />
   </component>
