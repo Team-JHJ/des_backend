@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import me.kjeok.des_backend.domain.Der;
 import me.kjeok.des_backend.domain.Description;
 import me.kjeok.des_backend.domain.Home;
+import me.kjeok.des_backend.dto.CategoryResponse;
 import me.kjeok.des_backend.dto.DerResponse;
 import me.kjeok.des_backend.dto.DescriptionResponse;
 import me.kjeok.des_backend.dto.HomeResponse;
@@ -26,6 +27,7 @@ public class DerController {
     private final DerService derService;
     private final DerRepository derRepository;
     private final HomeRepository homeRepository;
+    private final DescriptionService descriptionService;
 
     @GetMapping
     public ResponseEntity<List<Map<String, Object>>> getAll() {
@@ -48,7 +50,7 @@ public class DerController {
     }
 
     @GetMapping("/search")
-    public ResponseEntity<List<Map<String, Object>>> getDescriptionResponses(@RequestParam("homeId") Long homeId) {
+    public ResponseEntity<Map<String, Object>> getDescriptionResponses(@RequestParam("homeId") Long homeId) {
 
         // Home 객체 조회
         Home home = homeRepository.findById(homeId)
@@ -60,11 +62,14 @@ public class DerController {
             throw new IllegalArgumentException("No DERs found for the provided homeId: " + homeId);
         }
 
+        // CategoryResponse 조회
+        List<CategoryResponse> categoryResponses = descriptionService.getCategoryResponses("der_type");
+
         // 각 DER의 DescriptionResponse 생성 및 결합
-        List<Map<String, Object>> response = derList.stream()
+        List<Map<String, Object>> derResponse = derList.stream()
                 .map(der -> {
                     // 해당 DER에 대한 DescriptionResponse 생성
-                    List<DescriptionResponse> descriptionResponses = derService.getDescriptionResponses(home.getId(), der.getType(), der.getDerName());
+                    List<DescriptionResponse> descriptionResponses = derService.getDescriptionResponses(home.getId(), "der_content");
 
                     // DER 데이터와 DescriptionResponse를 결합
                     Map<String, Object> map = new HashMap<>();
@@ -78,10 +83,17 @@ public class DerController {
                 })
                 .toList();
 
+        // 최종 응답 데이터 구성
+        Map<String, Object> response = new HashMap<>();
+        response.put("categories", categoryResponses); // 상단 JSON 블록
+        response.put("derList", derResponse);          // DER 데이터 블록
+
         // ResponseEntity로 응답 반환
         return ResponseEntity.ok(response);
     }
 
+
+    @DeleteMapping
     public ResponseEntity<String> deleteDer(@RequestParam("derId") Long derId) {
         derRepository.deleteById(derId);
         return ResponseEntity.ok("DER deleted successfully");

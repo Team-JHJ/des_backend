@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import me.kjeok.des_backend.domain.Der;
 import me.kjeok.des_backend.domain.Description;
 import me.kjeok.des_backend.domain.Home;
+import me.kjeok.des_backend.dto.CategoryResponse;
 import me.kjeok.des_backend.dto.DerResponse;
 import me.kjeok.des_backend.dto.DescriptionResponse;
 import me.kjeok.des_backend.repository.DerRepository;
@@ -20,7 +21,6 @@ public class DerService {
     private final DerRepository derRepository;
     private final HomeRepository homeRepository;
     private final DescriptionService descriptionService;
-    private final DescriptionRepository descriptionRepository;
 
     public List<Der> findAll() {
         return derRepository.findAll();
@@ -53,13 +53,13 @@ public class DerService {
         }
     }
 
-    public List<DescriptionResponse> getDescriptionResponses(Long homeId, String type, String derName) {
+    public List<DescriptionResponse> getDescriptionResponses(Long homeId, String source) {
         // Home 객체 생성
         Home home = new Home();
         home.setId(homeId);
 
         // Der 조회
-        Der der = derRepository.findByHomeAndTypeAndDerName(home, type, derName)
+        Der der = derRepository.findByHome(home)
                 .stream()
                 .findFirst()
                 .orElseThrow(() -> new IllegalArgumentException("Der not found"));
@@ -68,7 +68,7 @@ public class DerService {
         DerResponse derResponse = new DerResponse(der);
 
         // Description 조회
-        List<Description> descriptions = descriptionService.findBySource("der_content");
+        List<Description> descriptions = descriptionService.findBySource(source);
         descriptions.forEach(description -> System.out.println("Description name: " + description.getName()));
 
         // DescriptionResponse로 변환
