@@ -6,7 +6,9 @@ import me.kjeok.des_backend.domain.Description;
 import me.kjeok.des_backend.domain.Home;
 import me.kjeok.des_backend.dto.DerResponse;
 import me.kjeok.des_backend.dto.DescriptionResponse;
+import me.kjeok.des_backend.dto.HomeResponse;
 import me.kjeok.des_backend.repository.DerRepository;
+import me.kjeok.des_backend.repository.HomeRepository;
 import me.kjeok.des_backend.service.DerService;
 import me.kjeok.des_backend.service.DescriptionService;
 import org.apache.coyote.Response;
@@ -23,6 +25,7 @@ import java.util.Map;
 public class DerController {
     private final DerService derService;
     private final DerRepository derRepository;
+    private final HomeRepository homeRepository;
 
     @GetMapping
     public ResponseEntity<List<Map<String, Object>>> getAll() {
@@ -45,24 +48,25 @@ public class DerController {
     }
 
     @GetMapping("/search")
-    public ResponseEntity<List<Map<String, Object>>> getDescriptionResponses(@RequestParam("homeId") Long homeId, @RequestParam("type") String type, @RequestParam("derName") String derName) {
+    public ResponseEntity<List<Map<String, Object>>> getDescriptionResponses(@RequestParam("homeId") Long homeId) {
 
-        // Home 객체 생성
-        Home home = new Home();
-        home.setId(homeId);
+        // Home 객체 조회
+        Home home = homeRepository.findById(homeId)
+                .orElseThrow(() -> new IllegalArgumentException("Home not found"));
 
-        // Der 조회
-        List<Der> derList = derRepository.findByHomeAndTypeAndDerName(home, type, derName);
+        // Home에 속한 모든 DER 조회
+        List<Der> derList = derRepository.findByHome(home);
         if (derList.isEmpty()) {
-            throw new IllegalArgumentException("No DERs found for the provided criteria.");
+            throw new IllegalArgumentException("No DERs found for the provided homeId: " + homeId);
         }
 
-        // DescriptionResponse 리스트 생성
-        List<DescriptionResponse> descriptionResponses = derService.getDescriptionResponses(homeId, type, derName);
-
-        // Der + DescriptionResponse 데이터를 결합하여 Map 생성
+        // 각 DER의 DescriptionResponse 생성 및 결합
         List<Map<String, Object>> response = derList.stream()
                 .map(der -> {
+                    // 해당 DER에 대한 DescriptionResponse 생성
+                    List<DescriptionResponse> descriptionResponses = derService.getDescriptionResponses(home.getId(), der.getType(), der.getDerName());
+
+                    // DER 데이터와 DescriptionResponse를 결합
                     Map<String, Object> map = new HashMap<>();
                     map.put("id", der.getId());
                     map.put("name", der.getDerName());
@@ -74,7 +78,7 @@ public class DerController {
                 })
                 .toList();
 
-        // ResponseEntity로 응답
+        // ResponseEntity로 응답 반환
         return ResponseEntity.ok(response);
     }
 }
