@@ -81,4 +81,9 @@ public class DerController {
         // ResponseEntity로 응답 반환
         return ResponseEntity.ok(response);
     }
+
+    public ResponseEntity<String> deleteDer(@RequestParam("derId") Long derId) {
+        derRepository.deleteById(derId);
+        return ResponseEntity.ok("DER deleted successfully");
+    }
 }

@@ -85,4 +85,8 @@ public class DerService {
                 })
                 .collect(Collectors.toList());
     }
+
+    public void deleteDer(Long id) {
+        derRepository.deleteById(id);
+    }
 }
