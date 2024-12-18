@@ -30,7 +30,7 @@ public class VppController {
 
 
     @GetMapping("/search")
-    public ResponseEntity<Map<String, Object>> getDescriptionResponses(@RequestParam("id") Long id) {
+    public ResponseEntity<Map<String, Object>> getDescriptionResponses(@RequestParam("vppId") Long id) {
 
         // Home 객체 조회
         Home home = homeRepository.findById(id)
@@ -68,7 +68,7 @@ public class VppController {
     }
 
     @DeleteMapping
-    public ResponseEntity<String> deleteVpp(@RequestParam("id") Long id) {
+    public ResponseEntity<String> deleteVpp(@RequestParam("vppId") Long id) {
         vppService.deleteVpp(id);
         return ResponseEntity.ok("Vpp deleted");
     }

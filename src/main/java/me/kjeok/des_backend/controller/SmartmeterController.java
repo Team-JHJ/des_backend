@@ -80,7 +80,7 @@ public class SmartmeterController {
     }
 
     @DeleteMapping
-    public ResponseEntity<String> deleteSmartmeter(@RequestParam("id") Long id) {
+    public ResponseEntity<String> deleteSmartmeter(@RequestParam("smartmeterId") Long id) {
         smartmeterService.deleteSmartmeter(id);
         return ResponseEntity.ok("Smartmeter deleted");
     }

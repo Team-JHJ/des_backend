@@ -22,9 +22,9 @@ public class HomeController {
     }
 
     @DeleteMapping
-    public ResponseEntity<String> deleteHome(@RequestParam Long homeId, @RequestParam String homeName) {
-        homeService.deleteHome(homeId, homeName);
-        return ResponseEntity.ok("Home " + homeName + " deleted");
+    public ResponseEntity<String> deleteHome(@RequestParam Long homeId) {
+        homeService.deleteHome(homeId);
+        return ResponseEntity.ok("Home Deleted");
     }
 
     @PostMapping

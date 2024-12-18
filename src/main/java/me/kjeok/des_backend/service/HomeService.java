@@ -74,8 +74,8 @@ public class HomeService {
     }
 
     @Transactional
-    public void deleteHome(Long homeId, String homeName) {
-        homeRepository.deleteByIdAndHomeName(homeId, homeName);
+    public void deleteHome(Long homeId) {
+        homeRepository.deleteById(homeId);
     }
 
     public String getHomeNameById(Long homeId) {
