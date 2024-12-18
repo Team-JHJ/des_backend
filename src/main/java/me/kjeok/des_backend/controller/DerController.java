@@ -4,10 +4,7 @@ import lombok.AllArgsConstructor;
 import me.kjeok.des_backend.domain.Der;
 import me.kjeok.des_backend.domain.Description;
 import me.kjeok.des_backend.domain.Home;
-import me.kjeok.des_backend.dto.CategoryResponse;
-import me.kjeok.des_backend.dto.DerResponse;
-import me.kjeok.des_backend.dto.DescriptionResponse;
-import me.kjeok.des_backend.dto.HomeResponse;
+import me.kjeok.des_backend.dto.*;
 import me.kjeok.des_backend.repository.DerRepository;
 import me.kjeok.des_backend.repository.HomeRepository;
 import me.kjeok.des_backend.service.DerService;
@@ -92,6 +89,12 @@ public class DerController {
     public ResponseEntity<String> createDer(@RequestParam("homeId") Long homeId, @RequestParam("derName") String derName, @RequestParam("type") String type) {
         derService.createDer(homeId, derName, type);
         return ResponseEntity.ok(derName+ " created successfully");
+    }
+
+    @PutMapping
+    public ResponseEntity<String> putDer(@RequestBody DerRequest derRequest) {
+        derService.putDer(derRequest);
+        return ResponseEntity.ok("DER updated successfully");
     }
 
 

@@ -6,10 +6,12 @@ import me.kjeok.des_backend.domain.Home;
 import me.kjeok.des_backend.domain.Inverter;
 import me.kjeok.des_backend.domain.Smartmeter;
 import me.kjeok.des_backend.dto.DescriptionResponse;
+import me.kjeok.des_backend.dto.InverterRequest;
 import me.kjeok.des_backend.dto.InverterResponse;
 import me.kjeok.des_backend.dto.SmartmeterResponse;
 import me.kjeok.des_backend.repository.HomeRepository;
 import me.kjeok.des_backend.repository.InverterRepository;
+import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -92,5 +94,17 @@ public class InverterService {
 
     public void deleteInverter(Long inverterId) {
         inverterRepository.deleteById(inverterId);
+    }
+
+    public List<InverterResponse> putInverter(InverterRequest inverterRequest) {
+        Inverter inverter = inverterRepository.findById(inverterRequest.getId())
+                .orElseThrow(() -> new IllegalArgumentException("Inverter not found"));
+
+        BeanUtils.copyProperties(inverterRequest, inverter);
+
+        return inverterRepository.findById(inverterRequest.getId())
+                .stream()
+                .map(InverterResponse::new)
+                .collect(Collectors.toList());
     }
 }

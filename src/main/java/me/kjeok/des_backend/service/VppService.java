@@ -6,8 +6,10 @@ import me.kjeok.des_backend.domain.Home;
 import me.kjeok.des_backend.domain.Vpp;
 import me.kjeok.des_backend.dto.DescriptionResponse;
 import me.kjeok.des_backend.dto.InverterResponse;
+import me.kjeok.des_backend.dto.VppRequest;
 import me.kjeok.des_backend.dto.VppResponse;
 import me.kjeok.des_backend.repository.VppRepository;
+import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -68,5 +70,18 @@ public class VppService {
     public void createVpp() {
         Vpp vpp = new Vpp();
         vppRepository.save(vpp);
+    }
+
+    public List<VppResponse> putVpp(VppRequest vppRequest) {
+        Vpp vpp = vppRepository.findById(vppRequest.getId())
+                .orElseThrow(() -> new IllegalArgumentException("Vpp not found for ID: " + vppRequest.getId()));
+
+        BeanUtils.copyProperties(vppRequest, vpp);
+        vppRepository.save(vpp);
+
+        return vppRepository.findById(vppRequest.getId())
+                .stream()
+                .map(VppResponse::new)
+                .collect(Collectors.toList());
     }
 }

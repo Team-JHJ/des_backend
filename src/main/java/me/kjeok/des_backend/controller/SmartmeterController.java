@@ -7,6 +7,7 @@ import me.kjeok.des_backend.domain.Homeload;
 import me.kjeok.des_backend.domain.Smartmeter;
 import me.kjeok.des_backend.dto.CategoryResponse;
 import me.kjeok.des_backend.dto.DescriptionResponse;
+import me.kjeok.des_backend.dto.SmartmeterRequest;
 import me.kjeok.des_backend.dto.SmartmeterResponse;
 import me.kjeok.des_backend.repository.HomeRepository;
 import me.kjeok.des_backend.repository.SmartmeterRepository;
@@ -85,6 +86,11 @@ public class SmartmeterController {
         return ResponseEntity.ok("Smartmeter deleted");
     }
 
+    @PutMapping
+    public ResponseEntity<String> putSmartmeter(@RequestBody SmartmeterRequest smartmeterRequest) {
+        smartmeterService.putSmartmeter(smartmeterRequest);
+        return ResponseEntity.ok("Smartmeter updated");
+    }
 
     //    @GetMapping
 //    public ResponseEntity<List<Map<String, Object>>> getAll() {

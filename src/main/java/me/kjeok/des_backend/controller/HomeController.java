@@ -39,6 +39,12 @@ public class HomeController {
         return ResponseEntity.ok(homeName);
     }
 
+    @PutMapping("/{homeId}")
+    public ResponseEntity<String> updateHomeName(@PathVariable Long homeId, @RequestParam String homeName) {
+        homeService.renameHome(homeId, homeName);
+        return ResponseEntity.ok("Home " + homeId + " updated");
+    }
+
 //    @PutMapping("/{homeId}")
 //    public ResponseEntity<String> updateHomeName(@PathVariable Long homeId, String homeName) {
 //        homeService.updateHome(homeId, homeName);

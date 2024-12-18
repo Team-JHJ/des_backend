@@ -5,11 +5,13 @@ import me.kjeok.des_backend.domain.Der;
 import me.kjeok.des_backend.domain.Description;
 import me.kjeok.des_backend.domain.Home;
 import me.kjeok.des_backend.dto.CategoryResponse;
+import me.kjeok.des_backend.dto.DerRequest;
 import me.kjeok.des_backend.dto.DerResponse;
 import me.kjeok.des_backend.dto.DescriptionResponse;
 import me.kjeok.des_backend.repository.DerRepository;
 import me.kjeok.des_backend.repository.DescriptionRepository;
 import me.kjeok.des_backend.repository.HomeRepository;
+import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -100,6 +102,19 @@ public class DerService {
         der.setType(type);
 
         derRepository.save(der);
+    }
+
+    public List<DerResponse> putDer(DerRequest derRequest) {
+        Der der = derRepository.findById(derRequest.getId())
+                .orElseThrow(() -> new IllegalArgumentException("Der not found"));
+
+        BeanUtils.copyProperties(derRequest, der);
+        derRepository.save(der);
+
+        return derRepository.findById(derRequest.getId())
+                .stream()
+                .map(DerResponse::new)
+                .collect(Collectors.toList());
     }
 
 }

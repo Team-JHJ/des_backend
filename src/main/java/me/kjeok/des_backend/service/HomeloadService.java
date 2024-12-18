@@ -5,9 +5,11 @@ import me.kjeok.des_backend.domain.Description;
 import me.kjeok.des_backend.domain.Home;
 import me.kjeok.des_backend.domain.Homeload;
 import me.kjeok.des_backend.dto.DescriptionResponse;
+import me.kjeok.des_backend.dto.HomeloadRequest;
 import me.kjeok.des_backend.dto.HomeloadResponse;
 import me.kjeok.des_backend.repository.HomeRepository;
 import me.kjeok.des_backend.repository.HomeloadRepository;
+import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -90,5 +92,18 @@ public class HomeloadService {
 
     public void deleteHomeload(Long homeloadId) {
         homeloadRepository.deleteById(homeloadId);
+    }
+
+    public List<HomeloadResponse> putHomeload(HomeloadRequest homeloadRequest) {
+        Homeload homeload = homeloadRepository.findById(homeloadRequest.getId())
+                .orElseThrow(() -> new IllegalArgumentException("Homeload not found with id: " + homeloadRequest.getId()));
+
+        BeanUtils.copyProperties(homeloadRequest, homeload);
+        homeloadRepository.save(homeload);
+
+        return homeloadRepository.findById(homeloadRequest.getId())
+                .stream()
+                .map(HomeloadResponse::new)
+                .collect(Collectors.toList());
     }
 }

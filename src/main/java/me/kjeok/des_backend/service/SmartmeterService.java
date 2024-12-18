@@ -7,9 +7,11 @@ import me.kjeok.des_backend.domain.Homeload;
 import me.kjeok.des_backend.domain.Smartmeter;
 import me.kjeok.des_backend.dto.DescriptionResponse;
 import me.kjeok.des_backend.dto.HomeloadResponse;
+import me.kjeok.des_backend.dto.SmartmeterRequest;
 import me.kjeok.des_backend.dto.SmartmeterResponse;
 import me.kjeok.des_backend.repository.HomeRepository;
 import me.kjeok.des_backend.repository.SmartmeterRepository;
+import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -95,4 +97,17 @@ public class SmartmeterService {
     public void deleteSmartmeter(Long id) {
         smartmeterRepository.deleteById(id);
     }
+
+    public List<SmartmeterResponse> putSmartmeter(SmartmeterRequest smartmeterRequest) {
+        Smartmeter smartmeter = smartmeterRepository.findById(smartmeterRequest.getId())
+                .orElseThrow(() -> new IllegalArgumentException("Smartmeter not found"));
+
+        BeanUtils.copyProperties(smartmeterRequest, smartmeter);
+
+        return smartmeterRepository.findById(smartmeterRequest.getId())
+                .stream()
+                .map(SmartmeterResponse::new)
+                .collect(Collectors.toList());
+    }
+
 }

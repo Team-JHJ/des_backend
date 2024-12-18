@@ -6,6 +6,7 @@ import me.kjeok.des_backend.domain.Homeload;
 import me.kjeok.des_backend.domain.Smartmeter;
 import me.kjeok.des_backend.dto.CategoryResponse;
 import me.kjeok.des_backend.dto.DescriptionResponse;
+import me.kjeok.des_backend.dto.HomeloadRequest;
 import me.kjeok.des_backend.dto.HomeloadResponse;
 import me.kjeok.des_backend.repository.HomeRepository;
 import me.kjeok.des_backend.repository.HomeloadRepository;
@@ -85,6 +86,11 @@ public class HomeloadController {
         return ResponseEntity.ok("Homeload deleted");
     }
 
+    @PutMapping
+    public ResponseEntity<String> putHomeload(@RequestBody HomeloadRequest homeloadRequest) {
+        homeloadService.putHomeload(homeloadRequest);
+        return ResponseEntity.ok("Homeload updated");
+    }
 
 //    @GetMapping
 //    public ResponseEntity<List<Map<String, Object>>> getAll() {

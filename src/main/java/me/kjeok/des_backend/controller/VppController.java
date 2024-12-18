@@ -6,6 +6,7 @@ import me.kjeok.des_backend.domain.Inverter;
 import me.kjeok.des_backend.domain.Vpp;
 import me.kjeok.des_backend.dto.CategoryResponse;
 import me.kjeok.des_backend.dto.DescriptionResponse;
+import me.kjeok.des_backend.dto.VppRequest;
 import me.kjeok.des_backend.dto.VppResponse;
 import me.kjeok.des_backend.repository.HomeRepository;
 import me.kjeok.des_backend.repository.VppRepository;
@@ -71,6 +72,12 @@ public class VppController {
     public ResponseEntity<String> deleteVpp(@RequestParam("vppId") Long id) {
         vppService.deleteVpp(id);
         return ResponseEntity.ok("Vpp deleted");
+    }
+
+    @PutMapping
+    public ResponseEntity<String> updateVpp(@RequestBody VppRequest vppRequest) {
+        vppService.putVpp(vppRequest);
+        return ResponseEntity.ok("Vpp updated");
     }
 
 //    @GetMapping

@@ -84,6 +84,14 @@ public class HomeService {
         return home.getHomeName();
     }
 
+    public String renameHome(Long homeId, String homeName) {
+        Home home = homeRepository.findById(homeId)
+                .orElseThrow(() -> new IllegalArgumentException("Home not found with id: " + homeId));
+        home.setHomeName(homeName);
+        homeRepository.save(home);
+        return home.getHomeName();
+    }
+
 
     /*public HomeResponse getHomeWithFaults(Long homeId) {
         // Home Fault 상태 업데이트

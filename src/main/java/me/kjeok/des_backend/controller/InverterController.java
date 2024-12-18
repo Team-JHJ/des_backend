@@ -5,6 +5,7 @@ import me.kjeok.des_backend.domain.Home;
 import me.kjeok.des_backend.domain.Inverter;
 import me.kjeok.des_backend.dto.CategoryResponse;
 import me.kjeok.des_backend.dto.DescriptionResponse;
+import me.kjeok.des_backend.dto.InverterRequest;
 import me.kjeok.des_backend.repository.HomeRepository;
 import me.kjeok.des_backend.repository.InverterRepository;
 import me.kjeok.des_backend.service.DescriptionService;
@@ -81,6 +82,11 @@ public class InverterController {
         return ResponseEntity.ok("Inverter deleted");
     }
 
+    @PutMapping
+    public ResponseEntity<String> putInverter(@RequestBody InverterRequest inverterRequest) {
+        inverterService.putInverter(inverterRequest);
+        return ResponseEntity.ok("Inverter updated");
+    }
 
 
 //    @GetMapping
