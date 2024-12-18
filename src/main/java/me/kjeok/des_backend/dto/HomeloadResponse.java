@@ -5,8 +5,6 @@ import me.kjeok.des_backend.domain.Homeload;
 
 @Getter
 public class HomeloadResponse {
-/*    private final Long id;
-    private final String type;*/
     private final String operatingHours;
     private final float powerRating;
     private final float energyCost;
@@ -21,8 +19,6 @@ public class HomeloadResponse {
     private final Boolean connectedDer;
 
     public HomeloadResponse(Homeload homeload) {
-/*        this.id = homeload.getId();
-        this.type = homeload.getType();*/
         this.operatingHours = homeload.getOperatingHours();
         this.powerRating = homeload.getPowerRating();
         this.energyCost = homeload.getEnergyCost();

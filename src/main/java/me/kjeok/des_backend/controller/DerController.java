@@ -80,9 +80,9 @@ public class DerController {
     }
 
     @PostMapping
-    public ResponseEntity<String> createDer(@RequestParam("homeId") Long homeId, @RequestParam("derName") String derName) {
-        derService.createDer(homeId, derName);
-        return ResponseEntity.ok("DER created successfully");
+    public ResponseEntity<String> createDer(@RequestParam("homeId") Long homeId, @RequestParam("derName") String derName, @RequestParam("type") String type) {
+        derService.createDer(homeId, derName, type);
+        return ResponseEntity.ok(derName+ " created successfully");
     }
 
 

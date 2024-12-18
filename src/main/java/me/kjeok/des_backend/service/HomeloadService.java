@@ -76,13 +76,14 @@ public class HomeloadService {
                 .collect(Collectors.toList());
     }
 
-    public void createHomeload(Long homeId, String homeloadName) {
+    public void createHomeload(Long homeId, String homeloadName, String type) {
         Home home = homeRepository.findById(homeId)
                 .orElseThrow(() -> new IllegalArgumentException("Home not found"));
 
         Homeload homeload = new Homeload();
         homeload.setHome(home);
         homeload.setHomeloadName(homeloadName);
+        homeload.setType(type);
 
         homeloadRepository.save(homeload);
     }

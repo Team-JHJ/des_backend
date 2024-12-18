@@ -64,10 +64,6 @@ public class HomeService {
         home.setHomeName(homeName);
         home.setVpp(vppRepository.findById(1L)
                 .orElseThrow(() -> new IllegalArgumentException("Vpp not found")));
-        home.setInverterFault(null);
-        home.setHomeloadFault(null);
-        home.setSmartmeterFault(null);
-        home.setDerFault(null);
 
         homeRepository.save(home);
     }
@@ -75,6 +71,12 @@ public class HomeService {
     @Transactional
     public void deleteHome(Long homeId, String homeName) {
         homeRepository.deleteByIdAndHomeName(homeId, homeName);
+    }
+
+    public String getHomeNameById(Long homeId) {
+        Home home = homeRepository.findById(homeId)
+                .orElseThrow(() -> new IllegalArgumentException("Home not found with id: " + homeId));
+        return home.getHomeName();
     }
 
 

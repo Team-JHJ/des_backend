@@ -7,7 +7,6 @@ import me.kjeok.des_backend.domain.Vpp;
 @Getter
 @AllArgsConstructor
 public class VppResponse {
-    //private Long id;
     private int aggregatedCapacity;
     private int availableStorage;
     private int batteryEfficiency;

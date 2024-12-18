@@ -66,9 +66,9 @@ public class HomeloadController {
     }
 
     @PostMapping
-    public ResponseEntity<String> createHomeload(@RequestParam("homeId") Long homeId, @RequestParam("homeloadName") String homeloadName) {
-        homeloadService.createHomeload(homeId, homeloadName);
-        return ResponseEntity.ok("Homeload created");
+    public ResponseEntity<String> createHomeload(@RequestParam("homeId") Long homeId, @RequestParam("homeloadName") String homeloadName, @RequestParam("type") String type) {
+        homeloadService.createHomeload(homeId, homeloadName, type);
+        return ResponseEntity.ok(homeloadName + " created");
     }
 
     @DeleteMapping

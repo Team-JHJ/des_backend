@@ -78,13 +78,14 @@ public class InverterService {
                 .collect(Collectors.toList());
     }
 
-    public void createInverter(Long homeId, String inverterName) {
+    public void createInverter(Long homeId, String inverterName, String type) {
         Home home = homeRepository.findById(homeId)
                 .orElseThrow(() -> new IllegalArgumentException("Home not found"));
 
         Inverter inverter = new Inverter();
         inverter.setHome(home);
         inverter.setInverterName(inverterName);
+        inverter.setType(type);
 
         inverterRepository.save(inverter);
     }

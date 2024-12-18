@@ -33,6 +33,12 @@ public class HomeController {
         return ResponseEntity.ok(homeName + " created");
     }
 
+    @GetMapping("/{homeId}")
+    public ResponseEntity<String> getHomeNameById(@PathVariable Long homeId) {
+        String homeName = homeService.getHomeNameById(homeId);
+        return ResponseEntity.ok(homeName);
+    }
+
 //    @PutMapping("/{homeId}")
 //    public ResponseEntity<String> updateHomeName(@PathVariable Long homeId, String homeName) {
 //        homeService.updateHome(homeId, homeName);

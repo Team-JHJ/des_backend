@@ -7,7 +7,6 @@ import me.kjeok.des_backend.domain.Smartmeter;
 @Getter
 @AllArgsConstructor
 public class SmartmeterResponse {
-    //private final Long id;
     private final String installationDate;
     private final Boolean realtimeMonitoring;
     private final String transmissionFrequency;
@@ -16,7 +15,6 @@ public class SmartmeterResponse {
     private final int currentConsumption;
 
     public SmartmeterResponse(Smartmeter smartmeter) {
-        //this.id = smartmeter.getId();
         this.installationDate = smartmeter.getInstallationDate();
         this.realtimeMonitoring = smartmeter.getRealtimeMonitoring();
         this.transmissionFrequency = smartmeter.getTransmissionFrequency();

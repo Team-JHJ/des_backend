@@ -5,7 +5,6 @@ import me.kjeok.des_backend.domain.Inverter;
 
 @Getter
 public class InverterResponse {
-    private final Long id;
     private final String installationDate;
     private final int efficiency;
     private final int warranty;
@@ -19,7 +18,6 @@ public class InverterResponse {
     private final Boolean gridTie;
 
     public InverterResponse(Inverter inverter) {
-        this.id = inverter.getId();
         this.installationDate = inverter.getInstallationDate();
         this.efficiency = inverter.getEfficiency();
         this.warranty = inverter.getWarranty();

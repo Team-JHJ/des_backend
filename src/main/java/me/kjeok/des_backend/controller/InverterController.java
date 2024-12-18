@@ -65,9 +65,9 @@ public class InverterController {
     }
 
     @PostMapping
-    public ResponseEntity<String> createInverter(@RequestParam("homeId") Long homeId, @RequestParam("inverterName") String inverterName) {
-        inverterService.createInverter(homeId, inverterName);
-        return ResponseEntity.ok("Inverter created");
+    public ResponseEntity<String> createInverter(@RequestParam("homeId") Long homeId, @RequestParam("inverterName") String inverterName, @RequestParam("type") String type) {
+        inverterService.createInverter(homeId, inverterName, type);
+        return ResponseEntity.ok(inverterName + " created");
     }
 
     @DeleteMapping
