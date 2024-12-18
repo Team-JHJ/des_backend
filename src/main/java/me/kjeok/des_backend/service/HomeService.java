@@ -62,6 +62,11 @@ public class HomeService {
     public void createHome(String homeName) {
         Home home = new Home();
         home.setHomeName(homeName);
+        home.setInverterFault(null);
+        home.setDerFault(null);
+        home.setSmartmeterFault(null);
+        home.setHomeloadFault(null);
+
         home.setVpp(vppRepository.findById(1L)
                 .orElseThrow(() -> new IllegalArgumentException("Vpp not found")));
 
