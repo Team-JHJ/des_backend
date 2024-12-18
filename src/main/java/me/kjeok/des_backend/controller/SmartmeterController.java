@@ -1,6 +1,7 @@
 package me.kjeok.des_backend.controller;
 
 import lombok.AllArgsConstructor;
+import me.kjeok.des_backend.domain.Der;
 import me.kjeok.des_backend.domain.Home;
 import me.kjeok.des_backend.domain.Homeload;
 import me.kjeok.des_backend.domain.Smartmeter;
@@ -38,7 +39,13 @@ public class SmartmeterController {
 
         List<Smartmeter> smartmeterList = smartmeterRepository.findByHome(home);
         if (smartmeterList.isEmpty()) {
-            throw new IllegalArgumentException("Not found for the provided homeId: " + homeId);
+            Smartmeter newSmartmeter = Smartmeter.builder()
+                    .home(home)
+                    .smartmeterName("DefaultSmartmeter")
+                    .isFault(false)
+                    .build();
+            Smartmeter saveSmartmeter = smartmeterRepository.save(newSmartmeter);
+            smartmeterList = List.of(saveSmartmeter);
         }
 
         // CategoryResponse 조회

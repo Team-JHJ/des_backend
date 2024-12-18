@@ -39,7 +39,16 @@ public class DerController {
         // Home에 속한 모든 DER 조회
         List<Der> derList = derRepository.findByHome(home);
         if (derList.isEmpty()) {
-            throw new IllegalArgumentException("No DERs found for the provided homeId: " + homeId);
+            // Der 생성
+            Der newDer = Der.builder()
+                    .home(home)
+                    .type("Solar")
+                    .derName("DefaultDer")
+                    .battery(0)
+                    .isFault(false)
+                    .build();
+            Der savedDer = derRepository.save(newDer);
+            derList = List.of(savedDer); // 새로운 Der를 리스트로 대체
         }
 
         // CategoryResponse 조회

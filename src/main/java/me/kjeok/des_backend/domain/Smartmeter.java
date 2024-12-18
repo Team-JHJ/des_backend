@@ -1,15 +1,15 @@
 package me.kjeok.des_backend.domain;
 
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 @Entity
 @Getter
 @Setter
 @NoArgsConstructor
 @Table(name = "smartmeter")
+@Builder
+@AllArgsConstructor
 public class Smartmeter {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

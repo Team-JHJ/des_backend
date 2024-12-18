@@ -36,7 +36,14 @@ public class InverterController {
 
         List<Inverter> inverterList = inverterRepository.findByHome(home);
         if (inverterList.isEmpty()) {
-            throw new IllegalArgumentException("Not found for the provided homeId: " + homeId);
+            Inverter newInverter = Inverter.builder()
+                    .home(home)
+                    .type("String")
+                    .inverterName("DefaultInverter")
+                    .isFault(false)
+                    .build();
+            Inverter saveInverter = inverterRepository.save(newInverter);
+            inverterList = List.of(saveInverter);
         }
 
         // CategoryResponse 조회

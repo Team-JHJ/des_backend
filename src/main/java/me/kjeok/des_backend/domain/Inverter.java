@@ -1,16 +1,15 @@
 package me.kjeok.des_backend.domain;
 
 import jakarta.persistence.*;
-import lombok.AccessLevel;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 @Entity
 @Table(name = "inverter")
 @Getter
 @NoArgsConstructor
 @Setter
+@Builder
+@AllArgsConstructor
 public class Inverter {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

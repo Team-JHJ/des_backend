@@ -1,16 +1,15 @@
 package me.kjeok.des_backend.domain;
 
 import jakarta.persistence.*;
-import lombok.AccessLevel;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 @Entity
 @Getter
 @Setter
 @NoArgsConstructor
 @Table(name = "homeload")
+@AllArgsConstructor
+@Builder
 public class Homeload {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -3,6 +3,7 @@ package me.kjeok.des_backend.controller;
 import lombok.AllArgsConstructor;
 import me.kjeok.des_backend.domain.Home;
 import me.kjeok.des_backend.domain.Homeload;
+import me.kjeok.des_backend.domain.Smartmeter;
 import me.kjeok.des_backend.dto.CategoryResponse;
 import me.kjeok.des_backend.dto.DescriptionResponse;
 import me.kjeok.des_backend.dto.HomeloadResponse;
@@ -36,7 +37,14 @@ public class HomeloadController {
 
         List<Homeload> homeloadList = homeloadRepository.findByHome(home);
         if (homeloadList.isEmpty()) {
-            throw new IllegalArgumentException("Not found for the provided homeId: " + homeId);
+            Homeload newHomeload = Homeload.builder()
+                    .home(home)
+                    .type("HVAC")
+                    .homeloadName("DefaultHomeload")
+                    .isFault(false)
+                    .build();
+            Homeload saveHomeload = homeloadRepository.save(newHomeload);
+            homeloadList = List.of(saveHomeload);
         }
 
         // CategoryResponse 조회
