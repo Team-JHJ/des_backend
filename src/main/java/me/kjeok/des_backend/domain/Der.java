@@ -35,7 +35,7 @@ public class Der {
     private int efficiency;
 
     @Column(name = "soc")
-    private int soc;
+    private float soc;
 
     @Column(name = "energy_generation")
     private int energyGeneration;
@@ -65,7 +65,7 @@ public class Der {
     private int co2Saved;
 
     @Column(name = "carbon_intensity")
-    private int carbonIntensity;
+    private float carbonIntensity;
 
     @Column(name = "renewable_share")
     private int renewableShare;

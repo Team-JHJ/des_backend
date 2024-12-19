@@ -13,7 +13,7 @@ public class HomeloadRequest {
     private final String operatingHours;
     private final float powerRating;
     private final float energyCost;
-    private final int dailyComsumption;
+    private final int dailyConsumption;
     private final float carbonFootprint;
     private final int loadDuration;
     private final float powerFactor;

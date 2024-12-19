@@ -102,6 +102,8 @@ public class InverterService {
                 .orElseThrow(() -> new IllegalArgumentException("Inverter not found"));
 
         BeanUtils.copyProperties(inverterRequest, inverter);
+        inverterRepository.save(inverter);
+
 
         return inverterRepository.findById(inverterRequest.getId())
                 .stream()

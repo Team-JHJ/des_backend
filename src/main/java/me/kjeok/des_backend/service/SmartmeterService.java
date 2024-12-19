@@ -109,6 +109,7 @@ public class SmartmeterService {
                 .orElseThrow(() -> new IllegalArgumentException("Smartmeter not found"));
 
         BeanUtils.copyProperties(smartmeterRequest, smartmeter);
+        smartmeterRepository.save(smartmeter);
 
         return smartmeterRepository.findById(smartmeterRequest.getId())
                 .stream()
