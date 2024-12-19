@@ -53,7 +53,7 @@ public class DerController {
         if (derList.isEmpty()) {
             Der newDer = Der.builder()
                     .home(home)
-                    .type("") // 기본값
+                    .type("Solar") // 기본값
                     .installationDate("") // 기본값
                     .location("") // 기본값
                     .generationCapacity(0) // 기본값

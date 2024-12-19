@@ -55,7 +55,7 @@ public class InverterController {
         if (inverterList.isEmpty()) {
             Inverter newInverter = Inverter.builder()
                     .home(home)
-                    .type("")
+                    .type("String")
                     .installationDate("") // 기본값
                     .efficiency(0) // 기본값
                     .warranty(0) // 기본값

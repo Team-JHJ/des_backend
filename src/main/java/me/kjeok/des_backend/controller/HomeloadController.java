@@ -55,7 +55,7 @@ public class HomeloadController {
         if (homeloadList.isEmpty()) {
             Homeload newHomeload = Homeload.builder()
                     .home(home)
-                    .type("") // 기본값
+                    .type("HVAC") // 기본값
                     .operatingHours("") // 기본값
                     .powerRating(0.0f) // 기본값
                     .energyCost(0.0f) // 기본값
