@@ -100,6 +100,7 @@ public class DerService {
         der.setDerName(derName);
         der.setHome(home);
         der.setType(type);
+        der.setIsFault(false);
 
         derRepository.save(der);
     }

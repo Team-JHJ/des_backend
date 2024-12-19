@@ -86,6 +86,7 @@ public class HomeloadService {
         homeload.setHome(home);
         homeload.setHomeloadName(homeloadName);
         homeload.setType(type);
+        homeload.setIsFault(false);
 
         homeloadRepository.save(homeload);
     }

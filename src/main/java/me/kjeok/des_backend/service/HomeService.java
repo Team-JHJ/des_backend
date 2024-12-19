@@ -31,14 +31,13 @@ public class HomeService {
             home.setSmartmeterFault(smartmeterIsFault);
             home.setHomeloadFault(homeloadIsFault);
             home.setDerFault(derIsFault);
-        }
 
-        // 변경된 홈 데이터를 한 번에 저장
-        homeRepository.saveAll(homes);
+            homeRepository.save(home);
+        }
     }
 
 
-    public List<HomeResponse> getAllHomeswithFaults() {
+    public List<HomeResponse> getAllHomewithFaults() {
         // 모든 홈 조회
         List<Home> homes = homeRepository.findAll();
 
@@ -47,14 +46,7 @@ public class HomeService {
 
         // HomeResponse 생성
         return homes.stream()
-                .map(home -> new HomeResponse(
-                        home.getId(),
-                        home.getHomeName(),
-                        home.getInverterFault(),
-                        home.getDerFault(),
-                        home.getHomeloadFault(),
-                        home.getSmartmeterFault()
-                ))
+                .map(HomeResponse::new)
                 .toList();
     }
 

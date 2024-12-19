@@ -89,6 +89,7 @@ public class SmartmeterService {
         Smartmeter smartmeter = new Smartmeter();
         smartmeter.setHome(home); // Home 설정
         smartmeter.setSmartmeterName(smartmeterName); // SmartmeterName 설정
+        smartmeter.setIsFault(false); // IsFault 설정
 
         // Smartmeter 저장
         smartmeterRepository.save(smartmeter);

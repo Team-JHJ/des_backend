@@ -88,6 +88,7 @@ public class InverterService {
         inverter.setHome(home);
         inverter.setInverterName(inverterName);
         inverter.setType(type);
+        inverter.setIsFault(false);
 
         inverterRepository.save(inverter);
     }

@@ -17,7 +17,7 @@ public class HomeController {
 
     @GetMapping
     public ResponseEntity<List<HomeResponse>> getAllHomes() {
-        List<HomeResponse> homes = homeService.getAllHomeswithFaults();
+        List<HomeResponse> homes = homeService.getAllHomewithFaults();
         return ResponseEntity.ok(homes);
     }
 
