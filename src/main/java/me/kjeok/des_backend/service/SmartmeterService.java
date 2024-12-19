@@ -15,6 +15,7 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 @Service
@@ -50,35 +51,39 @@ public class SmartmeterService {
         }
     }
 
-    public List<DescriptionResponse> getDescriptionResponses(Long homeId, String source) {
+    public Map<Long, List<DescriptionResponse>> getDescriptionResponses(Long homeId, String source) {
         // Home 객체 생성
         Home home = new Home();
         home.setId(homeId);
 
-        Smartmeter smartmeter = smartmeterRepository.findByHome(home)
-                .stream()
-                .findFirst()
-                .orElseThrow(() -> new IllegalArgumentException("Not found"));
-
-        SmartmeterResponse smartmeterResponse = new SmartmeterResponse(smartmeter);
+        // Smartmeter 리스트 조회
+        List<Smartmeter> smartmeters = smartmeterRepository.findByHome(home);
 
         // Description 조회
         List<Description> descriptions = descriptionService.findBySource(source);
-        descriptions.forEach(description -> System.out.println("Description name: " + description.getName()));
 
-        return descriptions.stream()
-                .map(description -> {
-                    Object value = null;
-                    try {
-                        value = getFieldValueByName(smartmeterResponse, description.getName());
-                    } catch (RuntimeException e) {
-                        System.out.println("Error mapping Description name: " + description.getName());
-                        e.printStackTrace();
-                    }
-                    return new DescriptionResponse(description, value);
-                })
-                .collect(Collectors.toList());
+        // Smartmeter ID별 DescriptionResponse 리스트 매핑
+        return smartmeters.stream()
+                .collect(Collectors.toMap(
+                        Smartmeter::getId, // Key: Smartmeter ID
+                        smartmeter -> descriptions.stream()
+                                .map(description -> {
+                                    Object value = null;
+                                    try {
+                                        // Smartmeter 객체의 필드에서 값을 가져오기
+                                        value = getFieldValueByName(new SmartmeterResponse(smartmeter), description.getName());
+                                    } catch (RuntimeException e) {
+                                        System.out.println("Error mapping Description name: " + description.getName());
+                                        e.printStackTrace();
+                                    }
+                                    return new DescriptionResponse(description, value);
+                                })
+                                .filter(response -> response.getValue() != null) // null 값 제거
+                                .collect(Collectors.toList()) // Value: DescriptionResponse 리스트
+                ));
     }
+
+
 
     public void createSmartmeter(Long homeId, String smartmeterName) {
         // Home 조회

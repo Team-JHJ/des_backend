@@ -6,6 +6,7 @@ import me.kjeok.des_backend.domain.Inverter;
 import me.kjeok.des_backend.dto.CategoryResponse;
 import me.kjeok.des_backend.dto.DescriptionResponse;
 import me.kjeok.des_backend.dto.InverterRequest;
+import me.kjeok.des_backend.dto.InverterResponse;
 import me.kjeok.des_backend.repository.HomeRepository;
 import me.kjeok.des_backend.repository.InverterRepository;
 import me.kjeok.des_backend.service.DescriptionService;
@@ -13,6 +14,7 @@ import me.kjeok.des_backend.service.InverterService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.lang.reflect.Field;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -26,6 +28,21 @@ public class InverterController {
     private final DescriptionService descriptionService;
     private final InverterService inverterService;
 
+
+    private Object getFieldValueByName(Object object, String fieldName) {
+        try {
+            // 객체의 클래스에서 필드 가져오기
+            Field field = object.getClass().getDeclaredField(fieldName);
+            field.setAccessible(true); // private 필드 접근 허용
+            return field.get(object); // 필드 값 반환
+        } catch (NoSuchFieldException e) {
+            System.err.println("Field not found: " + fieldName);
+        } catch (IllegalAccessException e) {
+            System.err.println("Field access error: " + fieldName);
+        }
+        return null; // 오류 발생 시 null 반환
+    }
+
     @GetMapping("/search")
     public ResponseEntity<Map<String, Object>> getDescriptionResponses(@RequestParam("homeId") Long homeId) {
 
@@ -33,6 +50,7 @@ public class InverterController {
         Home home = homeRepository.findById(homeId)
                 .orElseThrow(() -> new IllegalArgumentException("Home not found"));
 
+        // Inverter 조회 및 기본 Inverter 생성
         List<Inverter> inverterList = inverterRepository.findByHome(home);
         if (inverterList.isEmpty()) {
             Inverter newInverter = Inverter.builder()
@@ -41,22 +59,38 @@ public class InverterController {
                     .inverterName("DefaultInverter")
                     .isFault(false)
                     .build();
-            Inverter saveInverter = inverterRepository.save(newInverter);
-            inverterList = List.of(saveInverter);
+            Inverter savedInverter = inverterRepository.save(newInverter);
+            inverterList = List.of(savedInverter);
         }
 
         // CategoryResponse 조회
         List<CategoryResponse> categoryResponses = descriptionService.getCategoryResponses("inverter_type");
 
+        // Inverter별 DescriptionResponse 생성
         List<Map<String, Object>> inverterResponse = inverterList.stream()
                 .map(inverter -> {
-                    List<DescriptionResponse> descriptionResponses = inverterService.getDescriptionResponses(home.getId(), "inverter_content");
+                    // Inverter별 DescriptionResponse 생성
+                    List<DescriptionResponse> descriptionResponses = descriptionService.findBySource("inverter_content")
+                            .stream()
+                            .map(description -> {
+                                Object value = null;
+                                try {
+                                    value = getFieldValueByName(new InverterResponse(inverter), description.getName());
+                                } catch (RuntimeException e) {
+                                    System.out.println("Error mapping Description name: " + description.getName());
+                                    e.printStackTrace();
+                                }
+                                return new DescriptionResponse(description, value);
+                            })
+                            //.filter(response -> response.getValue() != null) // null 값 제거
+                            .toList();
 
+                    // Inverter 정보를 Map으로 구성
                     Map<String, Object> map = new HashMap<>();
                     map.put("id", inverter.getId());
                     map.put("name", inverter.getInverterName());
                     map.put("isFault", inverter.getIsFault());
-                    map.put("details", descriptionResponses); // DescriptionResponse 리스트 추가
+                    map.put("details", descriptionResponses); // Inverter별 고유한 DescriptionResponse 추가
                     return map;
                 })
                 .toList();
@@ -66,9 +100,9 @@ public class InverterController {
         response.put("category", categoryResponses);
         response.put("columns", inverterResponse);
 
-        // ResponseEntity로 응답 반환
         return ResponseEntity.ok(response);
     }
+
 
     @PostMapping
     public ResponseEntity<String> createInverter(@RequestParam("homeId") Long homeId, @RequestParam("inverterName") String inverterName, @RequestParam("type") String type) {

@@ -13,6 +13,7 @@ import org.apache.coyote.Response;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.lang.reflect.Field;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -26,6 +27,20 @@ public class DerController {
     private final HomeRepository homeRepository;
     private final DescriptionService descriptionService;
 
+    private Object getFieldValueByName(Object object, String fieldName) {
+        try {
+            // 객체의 클래스에서 필드 가져오기
+            Field field = object.getClass().getDeclaredField(fieldName);
+            field.setAccessible(true); // private 필드 접근 허용
+            return field.get(object); // 필드 값 반환
+        } catch (NoSuchFieldException e) {
+            System.err.println("Field not found: " + fieldName);
+        } catch (IllegalAccessException e) {
+            System.err.println("Field access error: " + fieldName);
+        }
+        return null; // 오류 발생 시 null 반환
+    }
+
     @GetMapping("/search")
     public ResponseEntity<Map<String, Object>> getDescriptionResponses(@RequestParam("homeId") Long homeId) {
 
@@ -33,38 +48,50 @@ public class DerController {
         Home home = homeRepository.findById(homeId)
                 .orElseThrow(() -> new IllegalArgumentException("Home not found"));
 
-        // Home에 속한 모든 DER 조회
+        // DER 조회 및 기본 DER 생성
         List<Der> derList = derRepository.findByHome(home);
         if (derList.isEmpty()) {
-            // Der 생성
             Der newDer = Der.builder()
                     .home(home)
-                    .type("Solar")
-                    .derName("DefaultDer")
-                    .battery(0)
-                    .isFault(false)
+                    .type("Solar") // 기본 타입
+                    .derName("DefaultDer") // 기본 이름
+                    .battery(0) // 기본 배터리 값
+                    .isFault(false) // 기본 Fault 상태
                     .build();
             Der savedDer = derRepository.save(newDer);
-            derList = List.of(savedDer); // 새로운 Der를 리스트로 대체
+            derList = List.of(savedDer);
         }
 
         // CategoryResponse 조회
         List<CategoryResponse> categoryResponses = descriptionService.getCategoryResponses("der_type");
 
-        // 각 DER의 DescriptionResponse 생성 및 결합
+        // DER별 DescriptionResponse 생성
         List<Map<String, Object>> derResponse = derList.stream()
                 .map(der -> {
-                    // 해당 DER에 대한 DescriptionResponse 생성
-                    List<DescriptionResponse> descriptionResponses = derService.getDescriptionResponses(home.getId(), "der_content");
+                    // DER별 DescriptionResponse 생성
+                    List<DescriptionResponse> descriptionResponses = descriptionService.findBySource("der_content")
+                            .stream()
+                            .map(description -> {
+                                Object value = null;
+                                try {
+                                    value = getFieldValueByName(new DerResponse(der), description.getName());
+                                } catch (RuntimeException e) {
+                                    System.out.println("Error mapping Description name: " + description.getName());
+                                    e.printStackTrace();
+                                }
+                                return new DescriptionResponse(description, value);
+                            })
+                            //.filter(response -> response.getValue() != null) // null 값 제거
+                            .toList();
 
-                    // DER 데이터와 DescriptionResponse를 결합
+                    // DER 정보를 Map으로 구성
                     Map<String, Object> map = new HashMap<>();
                     map.put("id", der.getId());
                     map.put("name", der.getDerName());
                     map.put("isFault", der.getIsFault());
                     map.put("type", der.getType());
                     map.put("battery", der.getBattery());
-                    map.put("details", descriptionResponses); // DescriptionResponse 리스트 추가
+                    map.put("details", descriptionResponses); // DER별 고유한 DescriptionResponse 추가
                     return map;
                 })
                 .toList();
@@ -74,9 +101,9 @@ public class DerController {
         response.put("category", categoryResponses);
         response.put("columns", derResponse);
 
-        // ResponseEntity로 응답 반환
         return ResponseEntity.ok(response);
     }
+
 
 
     @DeleteMapping

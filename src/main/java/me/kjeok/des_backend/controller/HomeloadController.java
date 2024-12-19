@@ -15,6 +15,7 @@ import me.kjeok.des_backend.service.HomeloadService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.lang.reflect.Field;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -28,6 +29,19 @@ public class HomeloadController {
     private final HomeloadRepository homeloadRepository;
     private final DescriptionService descriptionService;
 
+    private Object getFieldValueByName(Object object, String fieldName) {
+        try {
+            // 객체의 클래스에서 필드 가져오기
+            Field field = object.getClass().getDeclaredField(fieldName);
+            field.setAccessible(true); // private 필드 접근 허용
+            return field.get(object); // 필드 값 반환
+        } catch (NoSuchFieldException e) {
+            System.err.println("Field not found: " + fieldName);
+        } catch (IllegalAccessException e) {
+            System.err.println("Field access error: " + fieldName);
+        }
+        return null; // 오류 발생 시 null 반환
+    }
 
     @GetMapping("/search")
     public ResponseEntity<Map<String, Object>> getDescriptionResponses(@RequestParam("homeId") Long homeId) {
@@ -36,6 +50,7 @@ public class HomeloadController {
         Home home = homeRepository.findById(homeId)
                 .orElseThrow(() -> new IllegalArgumentException("Home not found"));
 
+        // Homeload 조회 및 기본 Homeload 생성
         List<Homeload> homeloadList = homeloadRepository.findByHome(home);
         if (homeloadList.isEmpty()) {
             Homeload newHomeload = Homeload.builder()
@@ -44,23 +59,39 @@ public class HomeloadController {
                     .homeloadName("DefaultHomeload")
                     .isFault(false)
                     .build();
-            Homeload saveHomeload = homeloadRepository.save(newHomeload);
-            homeloadList = List.of(saveHomeload);
+            Homeload savedHomeload = homeloadRepository.save(newHomeload);
+            homeloadList = List.of(savedHomeload);
         }
 
         // CategoryResponse 조회
         List<CategoryResponse> categoryResponses = descriptionService.getCategoryResponses("homeload_type");
 
+        // Homeload별 DescriptionResponse 생성
         List<Map<String, Object>> homeloadResponse = homeloadList.stream()
                 .map(homeload -> {
-                    List<DescriptionResponse> descriptionResponses = homeloadService.getDescriptionResponses(home.getId(), "homeload_content");
+                    // Homeload별 DescriptionResponse 생성
+                    List<DescriptionResponse> descriptionResponses = descriptionService.findBySource("homeload_content")
+                            .stream()
+                            .map(description -> {
+                                Object value = null;
+                                try {
+                                    value = getFieldValueByName(new HomeloadResponse(homeload), description.getName());
+                                } catch (RuntimeException e) {
+                                    System.out.println("Error mapping Description name: " + description.getName());
+                                    e.printStackTrace();
+                                }
+                                return new DescriptionResponse(description, value);
+                            })
+                            //.filter(response -> response.getValue() != null) // null 값 제거
+                            .toList();
 
+                    // Homeload 정보를 Map으로 구성
                     Map<String, Object> map = new HashMap<>();
                     map.put("id", homeload.getId());
                     map.put("name", homeload.getHomeloadName());
                     map.put("isFault", homeload.getIsFault());
                     map.put("type", homeload.getType());
-                    map.put("details", descriptionResponses); // DescriptionResponse 리스트 추가
+                    map.put("details", descriptionResponses); // Homeload별 고유한 DescriptionResponse 추가
                     return map;
                 })
                 .toList();
@@ -70,9 +101,9 @@ public class HomeloadController {
         response.put("category", categoryResponses);
         response.put("columns", homeloadResponse);
 
-        // ResponseEntity로 응답 반환
         return ResponseEntity.ok(response);
     }
+
 
     @PostMapping
     public ResponseEntity<String> createHomeload(@RequestParam("homeId") Long homeId, @RequestParam("homeloadName") String homeloadName, @RequestParam("type") String type) {

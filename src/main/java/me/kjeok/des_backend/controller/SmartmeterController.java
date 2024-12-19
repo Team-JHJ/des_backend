@@ -16,6 +16,7 @@ import me.kjeok.des_backend.service.SmartmeterService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.lang.reflect.Field;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -29,7 +30,19 @@ public class SmartmeterController {
     private final HomeRepository homeRepository;
     private final DescriptionService descriptionService;
 
-
+    private Object getFieldValueByName(Object object, String fieldName) {
+        try {
+            // 객체의 클래스에서 필드 가져오기
+            Field field = object.getClass().getDeclaredField(fieldName);
+            field.setAccessible(true); // private 필드 접근 허용
+            return field.get(object); // 필드 값 반환
+        } catch (NoSuchFieldException e) {
+            System.err.println("Field not found: " + fieldName);
+        } catch (IllegalAccessException e) {
+            System.err.println("Field access error: " + fieldName);
+        }
+        return null; // 오류 발생 시 null 반환
+    }
 
     @GetMapping("/search")
     public ResponseEntity<Map<String, Object>> getDescriptionResponses(@RequestParam("homeId") Long homeId) {
@@ -38,6 +51,7 @@ public class SmartmeterController {
         Home home = homeRepository.findById(homeId)
                 .orElseThrow(() -> new IllegalArgumentException("Home not found"));
 
+        // Smartmeter 조회 및 기본 Smartmeter 생성
         List<Smartmeter> smartmeterList = smartmeterRepository.findByHome(home);
         if (smartmeterList.isEmpty()) {
             Smartmeter newSmartmeter = Smartmeter.builder()
@@ -52,15 +66,31 @@ public class SmartmeterController {
         // CategoryResponse 조회
         List<CategoryResponse> categoryResponses = descriptionService.getCategoryResponses("smartmeter_type");
 
+        // Smartmeter별 DescriptionResponse 생성
         List<Map<String, Object>> smartmeterResponse = smartmeterList.stream()
                 .map(smartmeter -> {
-                    List<DescriptionResponse> descriptionResponses = smartmeterService.getDescriptionResponses(home.getId(), "smartmeter_content");
+                    // Smartmeter별 DescriptionResponse 생성
+                    List<DescriptionResponse> descriptionResponses = descriptionService.findBySource("smartmeter_content")
+                            .stream()
+                            .map(description -> {
+                                Object value = null;
+                                try {
+                                    value = getFieldValueByName(new SmartmeterResponse(smartmeter), description.getName());
+                                } catch (RuntimeException e) {
+                                    System.out.println("Error mapping Description name: " + description.getName());
+                                    e.printStackTrace();
+                                }
+                                return new DescriptionResponse(description, value);
+                            })
+                            //.filter(response -> response.getValue() != null) // null 값 제거
+                            .toList();
 
+                    // Smartmeter 정보를 Map으로 구성
                     Map<String, Object> map = new HashMap<>();
                     map.put("id", smartmeter.getId());
                     map.put("name", smartmeter.getSmartmeterName());
                     map.put("isFault", smartmeter.getIsFault());
-                    map.put("details", descriptionResponses); // DescriptionResponse 리스트 추가
+                    map.put("details", descriptionResponses); // Smartmeter별 고유한 DescriptionResponse 추가
                     return map;
                 })
                 .toList();
@@ -70,9 +100,9 @@ public class SmartmeterController {
         response.put("category", categoryResponses);
         response.put("columns", smartmeterResponse);
 
-        // ResponseEntity로 응답 반환
         return ResponseEntity.ok(response);
     }
+
 
     @PostMapping
     public ResponseEntity<String> createSmartmeter(@RequestParam("homeId") Long homeId, @RequestParam("smartmeterName") String smartmeterName) {
