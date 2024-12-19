@@ -55,9 +55,20 @@ public class InverterController {
         if (inverterList.isEmpty()) {
             Inverter newInverter = Inverter.builder()
                     .home(home)
-                    .type("String")
-                    .inverterName("DefaultInverter")
-                    .isFault(false)
+                    .type("")
+                    .installationDate("") // 기본값
+                    .efficiency(0) // 기본값
+                    .warranty(0) // 기본값
+                    .capacityFactor(0) // 기본값
+                    .mpptCount(0) // 기본값
+                    .manufacturer("") // 기본값
+                    .model("") // 기본값
+                    .phaseType("") // 기본값
+                    .status(false) // 기본값
+                    .monitoring(false) // 기본값
+                    .gridTie(false) // 기본값
+                    .isFault(false) // 기본값
+                    .inverterName("DefaultInverter") // 기본값
                     .build();
             Inverter savedInverter = inverterRepository.save(newInverter);
             inverterList = List.of(savedInverter);

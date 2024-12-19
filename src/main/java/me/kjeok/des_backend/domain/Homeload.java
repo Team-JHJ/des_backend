@@ -17,49 +17,49 @@ public class Homeload {
     private Long id;
 
     @Column(name = "type")
-    private String type;
+    private String type = "";
 
     @Column(name = "operating_hours")
-    private String operatingHours;
+    private String operatingHours = "";
 
     @Column(name = "power_rating")
-    private float powerRating;
+    private float powerRating = 0;
 
     @Column(name = "energy_cost")
-    private float energyCost;
+    private float energyCost = 0;
 
     @Column(name = "daily_consumption")
-    private int dailyConsumption;
+    private int dailyConsumption = 0;
 
     @Column(name = "carbon_footprint")
-    private float carbonFootprint;
+    private float carbonFootprint = 0;
 
     @Column(name = "load_duration")
-    private int loadDuration;
+    private int loadDuration = 0;
 
     @Column(name = "power_factor")
-    private float powerFactor;
+    private float powerFactor = 0;
 
     @Column(name = "load_priority")
-    private String loadPriority;
+    private String loadPriority = "";
 
     @Column(name = "smart_appliance")
-    private Boolean smartAppliance;
+    private Boolean smartAppliance = false;
 
     @Column(name = "backup_power")
-    private Boolean backupPower;
+    private Boolean backupPower = false;
 
     @Column(name = "load_flexibility")
-    private Boolean loadFlexibility;
+    private Boolean loadFlexibility = false;
 
     @Column(name = "connected_der")
-    private Boolean connectedDer;
+    private Boolean connectedDer = false;
 
     @Column(name = "is_fault")
-    private Boolean isFault;
+    private Boolean isFault = false;
 
     @Column(name = "homeload_name")
-    private String homeloadName;
+    private String homeloadName = "";
 
     @ManyToOne
     @JoinColumn(name = "home_id")

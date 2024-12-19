@@ -41,6 +41,31 @@ public class VppController {
         Vpp vpp = vppRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Vpp not found with ID: " + id));
 
+        if (vpp == null) {
+            Vpp newVpp = Vpp.builder()
+                    .aggregatedCapacity(0) // 기본값
+                    .availableStorage(0) // 기본값
+                    .batteryEfficiency(0) // 기본값
+                    .dispatchableEnergy(0) // 기본값
+                    .capacityFactor(0) // 기본값
+                    .forecastedLoad(0) // 기본값
+                    .responseTime(0) // 기본값
+                    .renewableShare(0) // 기본값
+                    .marketRevenue(0) // 기본값
+                    .sellingAmount(0) // 기본값
+                    .sellingPrice(0.0f) // 기본값
+                    .realtimeGrid(false) // 기본값
+                    .frequencyRegulation(false) // 기본값
+                    .voltageSupport(false) // 기본값
+                    .demandResponse(false) // 기본값
+                    .marketParticipation(false) // 기본값
+                    .isFault(false) // 기본값
+                    .build();
+
+            vppRepository.save(newVpp);
+        }
+
+
         // CategoryResponse 조회
         List<CategoryResponse> categoryResponses = descriptionService.getCategoryResponses("vpp_type");
 

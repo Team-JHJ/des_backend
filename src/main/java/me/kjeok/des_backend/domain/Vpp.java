@@ -1,9 +1,7 @@
 package me.kjeok.des_backend.domain;
 
 import jakarta.persistence.*;
-import lombok.AccessLevel;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.util.List;
 
@@ -11,6 +9,8 @@ import java.util.List;
 @Getter
 @NoArgsConstructor
 @Table(name = "vpp")
+@Builder
+@AllArgsConstructor
 public class Vpp {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -18,55 +18,55 @@ public class Vpp {
     private Long id;
 
     @Column(name = "aggregated_capacity")
-    private int aggregatedCapacity;
+    private int aggregatedCapacity = 0;
 
     @Column(name = "available_storage")
-    private int availableStorage;
+    private int availableStorage = 0;
 
     @Column(name = "battery_efficiency")
-    private int batteryEfficiency;
+    private int batteryEfficiency = 0;
 
     @Column(name = "dispatchable_energy")
-    private int dispatchableEnergy;
+    private int dispatchableEnergy = 0;
 
     @Column(name = "capacity_factor")
-    private int capacityFactor;
+    private int capacityFactor = 0;
 
     @Column(name = "forecasted_load")
-    private int forecastedLoad;
+    private int forecastedLoad = 0;
 
     @Column(name = "response_time")
-    private int responseTime;
+    private int responseTime = 0;
 
     @Column(name = "renewable_share")
-    private int renewableShare;
+    private int renewableShare = 0;
 
     @Column(name = "market_revenue")
-    private int marketRevenue;
+    private int marketRevenue = 0;
 
     @Column(name = "selling_amount")
-    private int sellingAmount;
+    private int sellingAmount = 0;
 
     @Column(name = "selling_price")
-    private float sellingPrice;
+    private float sellingPrice = 0;
 
     @Column(name = "realtime_grid")
-    private Boolean realtimeGrid;
+    private Boolean realtimeGrid = false;
 
     @Column(name = "frequency_regulation")
-    private Boolean frequencyRegulation;
+    private Boolean frequencyRegulation = false;
 
     @Column(name = "voltage_support")
-    private Boolean voltageSupport;
+    private Boolean voltageSupport = false;
 
     @Column(name = "demand_response")
-    private Boolean demandResponse;
+    private Boolean demandResponse = false;
 
     @Column(name = "market_participation")
-    private Boolean marketParticipation;
+    private Boolean marketParticipation = false;
 
     @Column(name = "is_fault")
-    private Boolean isFault;
+    private Boolean isFault = false;
 
     @OneToMany(mappedBy = "vpp", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Home> homes;

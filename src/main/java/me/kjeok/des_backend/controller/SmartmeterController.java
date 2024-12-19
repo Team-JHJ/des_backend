@@ -56,8 +56,14 @@ public class SmartmeterController {
         if (smartmeterList.isEmpty()) {
             Smartmeter newSmartmeter = Smartmeter.builder()
                     .home(home)
-                    .smartmeterName("DefaultSmartmeter")
-                    .isFault(false)
+                    .installationDate("") // 기본값
+                    .realtimeMonitoring(false) // 기본값
+                    .transmissionFrequency("") // 기본값
+                    .energyExported(0) // 기본값
+                    .energyImported(0) // 기본값
+                    .currentConsumption(0) // 기본값
+                    .isFault(false) // 기본값
+                    .smartmeterName("DefaultSmartmeter") // 기본값
                     .build();
             Smartmeter saveSmartmeter = smartmeterRepository.save(newSmartmeter);
             smartmeterList = List.of(saveSmartmeter);

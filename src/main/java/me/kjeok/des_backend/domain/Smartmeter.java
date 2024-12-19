@@ -17,28 +17,28 @@ public class Smartmeter {
     private Long id;
 
     @Column(name = "installation_date")
-    private String installationDate;
+    private String installationDate = "";
 
     @Column(name = "realtime_monitoring")
-    private Boolean realtimeMonitoring;
+    private Boolean realtimeMonitoring = false;
 
     @Column(name = "transmission_frequency")
-    private String transmissionFrequency;
+    private String transmissionFrequency = "";
 
     @Column(name = "energy_exported")
-    private int energyExported;
+    private int energyExported = 0;
 
     @Column(name = "energy_imported")
-    private int energyImported;
+    private int energyImported = 0;
 
     @Column(name = "current_consumption")
-    private int currentConsumption;
+    private int currentConsumption = 0;
 
     @Column(name = "is_fault")
-    private Boolean isFault;
+    private Boolean isFault = false;
 
     @Column(name = "smartmeter_name")
-    private String smartmeterName;
+    private String smartmeterName = "";
 
     @ManyToOne
     @JoinColumn(name = "home_id")

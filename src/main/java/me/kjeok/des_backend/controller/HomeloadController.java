@@ -55,9 +55,21 @@ public class HomeloadController {
         if (homeloadList.isEmpty()) {
             Homeload newHomeload = Homeload.builder()
                     .home(home)
-                    .type("HVAC")
-                    .homeloadName("DefaultHomeload")
-                    .isFault(false)
+                    .type("") // 기본값
+                    .operatingHours("") // 기본값
+                    .powerRating(0.0f) // 기본값
+                    .energyCost(0.0f) // 기본값
+                    .dailyConsumption(0) // 기본값
+                    .carbonFootprint(0.0f) // 기본값
+                    .loadDuration(0) // 기본값
+                    .powerFactor(0.0f) // 기본값
+                    .loadPriority("") // 기본값
+                    .smartAppliance(false) // 기본값
+                    .backupPower(false) // 기본값
+                    .loadFlexibility(false) // 기본값
+                    .connectedDer(false) // 기본값
+                    .isFault(false) // 기본값
+                    .homeloadName("DefaultHomeload") // 기본값
                     .build();
             Homeload savedHomeload = homeloadRepository.save(newHomeload);
             homeloadList = List.of(savedHomeload);
