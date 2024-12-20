@@ -91,13 +91,20 @@ public class SmartmeterService {
                 .orElseThrow(() -> new IllegalArgumentException("Home not found"));
 
         // Smartmeter 생성 및 설정
-        Smartmeter smartmeter = new Smartmeter();
-        smartmeter.setHome(home); // Home 설정
-        smartmeter.setSmartmeterName(smartmeterName); // SmartmeterName 설정
-        smartmeter.setIsFault(false); // IsFault 설정
+        Smartmeter newSmartmeter = Smartmeter.builder()
+                .home(home)
+                .installationDate("-") // 기본값
+                .realtimeMonitoring(false) // 기본값
+                .transmissionFrequency("-") // 기본값
+                .energyExported(0) // 기본값
+                .energyImported(0) // 기본값
+                .currentConsumption(0) // 기본값
+                .isFault(false) // 기본값
+                .smartmeterName(smartmeterName) // 기본값
+                .build();
 
         // Smartmeter 저장
-        smartmeterRepository.save(smartmeter);
+        smartmeterRepository.save(newSmartmeter);
     }
 
     public void deleteSmartmeter(Long id) {

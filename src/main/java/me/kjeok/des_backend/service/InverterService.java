@@ -84,13 +84,25 @@ public class InverterService {
         Home home = homeRepository.findById(homeId)
                 .orElseThrow(() -> new IllegalArgumentException("Home not found"));
 
-        Inverter inverter = new Inverter();
-        inverter.setHome(home);
-        inverter.setInverterName(inverterName);
-        inverter.setType(type);
-        inverter.setIsFault(false);
+        Inverter newInverter = Inverter.builder()
+                .home(home)
+                .type(type)
+                .installationDate("-") // 기본값
+                .efficiency(0) // 기본값
+                .warranty(0) // 기본값
+                .capacityFactor(0) // 기본값
+                .mpptCount(0) // 기본값
+                .manufacturer("-") // 기본값
+                .model("-") // 기본값
+                .phaseType("-") // 기본값
+                .status(false) // 기본값
+                .monitoring(false) // 기본값
+                .gridTie(false) // 기본값
+                .isFault(false) // 기본값
+                .inverterName(inverterName) // 기본값
+                .build();
 
-        inverterRepository.save(inverter);
+        inverterRepository.save(newInverter);
     }
 
     public void deleteInverter(Long inverterId) {

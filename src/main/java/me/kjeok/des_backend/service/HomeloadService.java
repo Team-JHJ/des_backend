@@ -82,13 +82,26 @@ public class HomeloadService {
         Home home = homeRepository.findById(homeId)
                 .orElseThrow(() -> new IllegalArgumentException("Home not found"));
 
-        Homeload homeload = new Homeload();
-        homeload.setHome(home);
-        homeload.setHomeloadName(homeloadName);
-        homeload.setType(type);
-        homeload.setIsFault(false);
+        Homeload newHomeload = Homeload.builder()
+                .home(home)
+                .type(type) // 기본값
+                .operatingHours("-") // 기본값
+                .powerRating(0.0f) // 기본값
+                .energyCost(0.0f) // 기본값
+                .dailyConsumption(0) // 기본값
+                .carbonFootprint(0.0f) // 기본값
+                .loadDuration(0) // 기본값
+                .powerFactor(0.0f) // 기본값
+                .loadPriority("-") // 기본값
+                .smartAppliance(false) // 기본값
+                .backupPower(false) // 기본값
+                .loadFlexibility(false) // 기본값
+                .connectedDer(false) // 기본값
+                .isFault(false) // 기본값
+                .homeloadName(homeloadName) // 기본값
+                .build();
 
-        homeloadRepository.save(homeload);
+        homeloadRepository.save(newHomeload);
     }
 
     public void deleteHomeload(Long homeloadId) {

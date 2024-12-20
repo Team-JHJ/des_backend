@@ -63,7 +63,7 @@ public class HomeloadController {
                     .carbonFootprint(0.0f) // 기본값
                     .loadDuration(0) // 기본값
                     .powerFactor(0.0f) // 기본값
-                    .loadPriority("") // 기본값
+                    .loadPriority("-") // 기본값
                     .smartAppliance(false) // 기본값
                     .backupPower(false) // 기본값
                     .loadFlexibility(false) // 기본값
