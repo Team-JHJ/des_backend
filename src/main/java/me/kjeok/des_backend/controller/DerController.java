@@ -54,8 +54,8 @@ public class DerController {
             Der newDer = Der.builder()
                     .home(home)
                     .type("Solar") // 기본값
-                    .installationDate("") // 기본값
-                    .location("") // 기본값
+                    .installationDate("-") // 기본값
+                    .location("-") // 기본값
                     .generationCapacity(0) // 기본값
                     .storageCapacity(0) // 기본값
                     .efficiency(0) // 기본값

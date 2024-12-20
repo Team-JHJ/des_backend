@@ -56,9 +56,9 @@ public class SmartmeterController {
         if (smartmeterList.isEmpty()) {
             Smartmeter newSmartmeter = Smartmeter.builder()
                     .home(home)
-                    .installationDate("") // 기본값
+                    .installationDate("-") // 기본값
                     .realtimeMonitoring(false) // 기본값
-                    .transmissionFrequency("") // 기본값
+                    .transmissionFrequency("-") // 기본값
                     .energyExported(0) // 기본값
                     .energyImported(0) // 기본값
                     .currentConsumption(0) // 기본값

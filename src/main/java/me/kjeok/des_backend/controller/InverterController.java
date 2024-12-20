@@ -56,14 +56,14 @@ public class InverterController {
             Inverter newInverter = Inverter.builder()
                     .home(home)
                     .type("String")
-                    .installationDate("") // 기본값
+                    .installationDate("-") // 기본값
                     .efficiency(0) // 기본값
                     .warranty(0) // 기본값
                     .capacityFactor(0) // 기본값
                     .mpptCount(0) // 기본값
-                    .manufacturer("") // 기본값
-                    .model("") // 기본값
-                    .phaseType("") // 기본값
+                    .manufacturer("-") // 기본값
+                    .model("-") // 기본값
+                    .phaseType("-") // 기본값
                     .status(false) // 기본값
                     .monitoring(false) // 기본값
                     .gridTie(false) // 기본값
