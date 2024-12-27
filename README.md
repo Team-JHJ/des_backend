@@ -52,7 +52,7 @@
 ```
 
 ## 기술 스택
-- **프레임워크**: Spring Boot
+- **프레임워크**: Spring Boot, React
 - **데이터베이스**: MySQL
 - **컨테이너화**: Docker
 - **배포 환경**: AWS EC2
@@ -61,4 +61,4 @@
 <img width="737" alt="des아키텍쳐" src="https://github.com/user-attachments/assets/2649e6f5-2fc8-4ae8-96e9-80e583a1f039" />
 
 ## 시연 영상
-
+https://github.com/user-attachments/assets/cd1c27ef-0695-4077-90ed-5f1842e0c508
