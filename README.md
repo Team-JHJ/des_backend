@@ -6,10 +6,13 @@
 <br>
 
 ## 🧰주요 기능
+<br>
+
 ### 💹데이터 관리
 - 다양한 분산에너지 데이터 구성 관리
 - 각 자원별 상태를 관리자가 쉽게 볼 수 있도록 제공하여 효율적인 상태관리를 도움
 - 기기의 결함 유무를 표시하여 효율적인 결함 관리를 도움
+<br>
 
 ### 📊API 제공
 - RESTful API를 통해 데이터를 카테고리별 조회 가능
@@ -19,6 +22,7 @@
   - **PUT**: /api/{category}
   - **POST**: /api/{category}
   - **DELETE**: /api/{category}
+<br>
 
 ### ☎️계층적 응답 구조
 ```
@@ -60,6 +64,7 @@
 - **데이터베이스**: MySQL
 - **컨테이너화**: Docker
 - **배포 환경**: AWS EC2
+<br>
 
 ### ⚙️시스템 아키텍쳐
 <img width="737" alt="des아키텍쳐" src="https://github.com/user-attachments/assets/2649e6f5-2fc8-4ae8-96e9-80e583a1f039" />
