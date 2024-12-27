@@ -3,6 +3,8 @@
 ## 📖프로젝트 소개
 이 프로젝트는 분산에너지의 구성 요소인 DER, HomeLoad, Inverter, SmarterMeter, VPP와 같은 자원들을 통합적으로 관리하고 효율적으로 데이터를 제공하기 위한 시스템입니다. 관리자는 해당 시스템을 이용하여 더 쉽게 자원 및 기기의 상태를 파악, 관리하여 효과적인 자원관리 계획을 수립할 수 있습니다.
 
+<br>
+
 ## 🧰주요 기능
 ### 💹데이터 관리
 - 다양한 분산에너지 데이터 구성 관리
@@ -51,6 +53,8 @@
 }
 ```
 
+<br>
+
 ## 🔧기술 스택
 - **프레임워크**: Spring Boot, React
 - **데이터베이스**: MySQL
@@ -59,6 +63,8 @@
 
 ### ⚙️시스템 아키텍쳐
 <img width="737" alt="des아키텍쳐" src="https://github.com/user-attachments/assets/2649e6f5-2fc8-4ae8-96e9-80e583a1f039" />
+
+<br>
 
 ## 📷시연 영상
 https://github.com/user-attachments/assets/cd1c27ef-0695-4077-90ed-5f1842e0c508
